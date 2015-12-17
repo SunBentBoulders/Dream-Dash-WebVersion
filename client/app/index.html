@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Dream Dash</title>
+
+		<!-- Angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <!-- Angular ui router -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+         <!-- jQuery (required by angular) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!-- our custom styles -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body class="container-fluid">
+		<!-- fixed navbar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<ul class="container-fluid">
+				<ul class="navbar-header">
+					<a class="navbar-brand" ui-sref="info"><b>Info</b></a>
+					<a class="navbar-brand" ui-sref="aboutGame"><b>About the Game</b></a>
+				</ul>
+				<ul class="navbar-right">
+					<a class="navbar-brand" ui-sref="/"><img class="dreamDashLogo" src="assets/dreamDashLogo4square.png" alt="Dream Dash Logo"></img></a>
+				</ul>
+			</ul>
+		</nav>
+		<div ui-view></div>
+	</body>
+</html>
