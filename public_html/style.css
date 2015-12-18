@@ -1,4 +1,7 @@
-
+body {
+	/* makes space for header above body */
+	margin-top: 80px;
+}
 /* style for logo in nav bar */
 .dreamDashLogo {
 	max-height: 50px;
