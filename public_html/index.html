@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
         <!-- our custom styles -->
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="minified/stylesheet.min.css"
 	</head>
 	<body class="container-fluid" ng-app="dreamDash">
 		<!-- fixed navbar -->
@@ -29,7 +30,6 @@
 			</ul>
 		</nav>
 		<div ui-view></div>
-	</body>
 	<!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <!-- Angular ui router -->
@@ -38,14 +38,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript for bootstrap-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+	<!-- scripts for game -->
+    <script src="minified/allfiles.min.js"></script>
+	</body>
+
+	 <!-- Non-Minified Script Tags Below   -->
+	<!--
 	<script type="text/javascript" src="app.js"></script>
 	<script type="text/javascript" src="aboutGame/aboutDreamDash.js"></script>
 	<script type="text/javascript" src="game/game.js"></script>
 	<script type="text/javascript" src="info/info.js"></script>
 	<script type="text/javascript" src="game/mainGame.js"></script>
 
-	<!-- scripts for game -->
-	 <!-- Non-Minified Script Tags Below   -->
 	<script src="vendor/phaser.js"></script>
 	<script src="vendor/webfontloader.js"></script>
 	<script src="lib/phaser-state-transition-plugin.min.js"></script>
@@ -55,7 +60,6 @@
 	<script src="lib/style.js"></script>
 	<script src="lib/mixins.js"></script>
 
-
 	<script src="src/Preloader.js"></script>
 	<script src="src/Boot.js"></script>
 	<script src="src/MainMenu.js"></script>
@@ -64,8 +68,7 @@
 	<script src="src/Credits.js"></script>
 	<script src="src/Options.js"></script>
 	<script src="src/LevelUp.js"></script>
-
-	<!--<script src="minified/allfiles.min.js"></script> -->
+    -->
 	<script>console.log("end of scripts loading in gameView.html")</script>
 
 </html>
