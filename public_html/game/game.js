@@ -35,4 +35,3 @@ angular.module('dreamDash.game', [
 		link: linkFunction
 	}
 })
-
