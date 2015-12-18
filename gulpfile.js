@@ -6,20 +6,23 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
 var cssmin = require('gulp-minify-css');
-// var changed = require('gulp-changed');
-//var mocha = require('gulp-mocha');
+/*var changed = require('gulp-changed');
+var mocha = require('gulp-mocha');*/
 
 var paths = {
-    scripts: ['vendor/**/*.js', 'lib/**/*.js', 'src/**/*.js'],
-    images: ['img/**/*', 'assets/images/**/*', 'icons/**/*'],
-    audio: 'assets/bgm/**/*',
-    css: ['css/**/*.css', 'assets/style/**/*.css']
+    scripts: ['public_html/app.js', 'public_html/aboutGame/**/*.js', 'public_html/info/**/*.js', 'public_html/game/**/*.js', 'public_html/vendor/**/*.js', 'public_html/lib/**/*.js', 'public_html/src/**/*.js'],
+    images: ['public_html/img/**/*', 'public_html/assets/images/**/*', 'public_html/icons/**/*'],
+    audio: 'public_html/assets/bgm/**/*',
+    css: ['public_html/css/**/*.css', 'public_html/assets/style/**/*.css'] 
+    //will need to add style.css at root to this task, or can combine with other style/css
 };
 
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['scripts']);
+    /*    
     gulp.watch(paths.images, ['images']);
     gulp.watch(paths.audio, ['audio']);
+    */
     gulp.watch(paths.css, ['css']);
 });
 
@@ -31,24 +34,24 @@ gulp.task('scripts', function(){
         .pipe(uglify())
         //rename minified file, then place in build folder
         .pipe(rename({extname: '.min.js'}))
-        .pipe(gulp.dest('minified'));
+        .pipe(gulp.dest('public_html/minified'));
         
 });
 
 //TASK to Minify All Images - Currently only reduces size by 1.5MB, using API instead
-gulp.task('minimgs', function(){
+/*gulp.task('minimgs', function(){
     return gulp.src(paths.images)
-        .pipe(imagemin({optimizationLevel: 7}))
+        .pipe(imagemin({optimizationLevel: 6}))
         .pipe(gulp.dest('minified'));
-});
+});*/
 
 //TASK to Minify All CSS
 gulp.task('mincss', function(){
     return gulp.src(paths.css)
-        // .pipe(concat('allfiles.css'))
+        /*.pipe(concat('allfiles.css'))*/
         .pipe(cssmin({compatibility: 'ie8'}))
         .pipe(rename({extname: '.min.css'}))
-        .pipe(gulp.dest('minified'))
+        .pipe(gulp.dest('public_html/minified'))
 });
 
 /* START of MOCHA TEST-RELATED
