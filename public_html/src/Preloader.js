@@ -89,7 +89,7 @@ Preloader.prototype = {
         game.load.audio('bgm', 'assets/bgm/background_music.ogg');
         game.load.audio('startDing', 'assets/bgm/startDing.wav');
 
-        this.loadFonts(game);
+//        this.loadFonts(game);
 
     },
 
