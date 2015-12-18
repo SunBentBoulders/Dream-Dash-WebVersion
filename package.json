@@ -4,6 +4,7 @@
   "description": "",
   "main": "boot.js",
   "dependencies": {
+    "express": "^4.13.3",
     "phaser-state-transition-plugin": "^0.1.6"
   },
   "devDependencies": {
