@@ -22,8 +22,8 @@
 ## Usage
 
 Options for playing Dream Dash include:
-	1. Download from [Apple App Store](https://www.securityfederalbank.com/images/related-images/AppStore_BADGE.png)
-    2. Download from [Google Play](http://static1.squarespace.com/static/5109335ae4b04ea0ec18c6b9/t/5255bec1e4b006abe8bb5821/1381351107444/GooglePlay_appStore.png)
+	1. Download from [![App Store](/public_html/assets/images/AppStore_logo.png)](http://tbd.com)
+    2. Download from [![Google Play](/public_html/assets/images/GooglePlay_logo.png)](https://play.google.com/store/apps/details?id=com.sunbentboulders.dreamdash)
     3. Play online [here](http://dreamdash.herokuapp.com)
 	4. Clone this repo to your local machine and run through localhost
 
@@ -35,7 +35,7 @@ Options for playing Dream Dash include:
 
 ### Roadmap
 
-View the project roadmap [here](https://github.com/SunBentBoulders/MobileCapeRunner/issues)
+View the project roadmap [here](https://github.com/SunBentBoulders/Dream-Dash-WebVersion/issues)
 
 
 ## Contributing
