@@ -1,9 +1,14 @@
 body {
     margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
     background: #000;
-
+     /* makes space for header above body */
     margin-top: 80px;
 }
+
+/* style for logo in nav bar */
+.dreamDashLogo {
+    max-height: 50px;
+
 
 #orientation {
     margin: 0 auto;
@@ -25,6 +30,7 @@ body {
     display: block;
     margin: 0 auto;
  }*/
+
  #aboutGame {
     color: white;
 }
@@ -34,6 +40,7 @@ div#aboutGame {
     margin-right: 120px;
 }
 
+
 #aboutGame img {
-    
-}
+
+
