@@ -30,7 +30,6 @@ var Game = function(game) {
     game.scrollableWidth = game.width * 2.5; // same as 2000 but in relation to the game.width
     this.right = 1;
     this.left = 0;
-    var clouds;
     var backgroundScroll;
     var pause;
     var pausedText;
@@ -55,7 +54,6 @@ Game.prototype = {
         }
 
         // load the rest of the game assets. see preload gamestate for others
-        // game.load.image('clouds', 'img/cloud.png');
         game.load.image('enemy', 'img/friendlyGhost.png');
         game.load.image('life', 'img/candle.png');
         // each sprite image is 32px wide by 48px tall in spritesheet
@@ -84,27 +82,9 @@ Game.prototype = {
 
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        // creates infinite tiling of the cloud image
-        // clouds = game.add.tileSprite(0,0,game.scrollableWidth,game.height, 'clouds');
-        // set the scroll speed for the background image
-        // backgroundScroll = 1;
-
 
         // this is for the game menu
         this.stage.disableVisibilityChange = false;
-
-        // code for the plain background
-        // ==================================
-        // set background color
-        // this.stage.backgroundColor = 0x00007f;
-        // add horizon line
-        // var graphics = game.add.graphics(0,0);
-        // graphics.beginFill(0x000019);
-        // graphics.lineStyle(2, 0x000019, 1);
-        // syntax: top left x, top left y, width, height
-        // graphics.drawRect(0, game.height/2, game.scrollableWidth, game.height);
-        // graphics.endFill();
-        // ==================================
 
 
         // add main sprites to screen
@@ -144,7 +124,6 @@ Game.prototype = {
         //  Create an enemy inside of the 'enemies' group
         game.addEnemy = function() {
             game.enemyCount++;
-            // console.log("addEnemy enemyCount", game.enemyCount);
             // create enemy that starts invisible with a size of 0
             var enemy = game.enemies.create(game.camera.view.randomX, game.height / 2, 'enemy');
             enemy.scale.setTo(0);
@@ -198,7 +177,6 @@ Game.prototype = {
         //  Create a token inside of the 'tokensToCollect' group
         game.addTokenToCollect = function() {
             // game.collectedTokens++;
-            // console.log("addTokenToCollect collectedTokens", game.collectedTokens);
             var token = game.tokensToCollect.create(game.camera.view.randomX, game.height / 2, 'token');
             token.scale.setTo(0);
             token.anchor.setTo(.5);
@@ -227,7 +205,6 @@ Game.prototype = {
             positionTween.onComplete.add(function() {
                 // game.collectedTokens--;
                 token.kill();
-                // console.log("token killed, collectedTokens is", game.collectedTokens)
 
             });
         };
@@ -291,9 +268,6 @@ Game.prototype = {
         this.player.animations.add('right', [5, 6, 7, 8, 7, 6], 12, true);
 
         // The score=============================================
-        // will add this back once level up game state is made
-        // this.scoreText = game.add.text(this.realPlayer.x-400, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
-        // this.scoreText.fixedToCamera = true;
         if (window.deviceAssetSize === 'desktop') {
             this.scoreSprite = game.add.sprite(this.player.x - this.game.width / 1.937, this.game.height / 37.5, 'token');
             this.leftToCollect = game.add.text(this.player.x - this.game.width / 2.3, this.game.height / 37.5, ' x ' + this.tokensToCollect, {
@@ -362,14 +336,6 @@ Game.prototype = {
     },
 
     update: function(game) {
-        //make the background scroll==================================
-        // clouds.tilePosition.y += backgroundScroll;
-        //  Collide the player and the stars with the platforms
-        // game.physics.arcade.collide(this.player, game.enemies,this.gameOver, null, this);
-        // game.physics.arcade.collide(this.stars, platforms);
-        //=======================================================
-
-
 
         // collisions/collections===============================
         //Check to see if tokensTocollect is collected if so, run collectToken
@@ -389,10 +355,6 @@ Game.prototype = {
 
 
         // controls=========================================
-        //checks to see if the keyboard is being used
-        // console.log('the keyboard is enabled',game.input.keyboard.enabled);
-        //check to see if finger is touching screen
-        // console.log('the touchScreen is enabled',!!game.input.pointer1);
         //this is for computer input
         if (game.device.desktop) {
             if (cursors.left.isDown) {
@@ -413,7 +375,6 @@ Game.prototype = {
             //this if for the phone input
             if (game.input.pointer1.isDown) {
                 //check to see if the touch is happening on the left
-                // console.log('pointer1 is down');
                 if (Math.floor(game.input.x / (game.width / 2)) === this.left) {
                     //move to the left
                     this.player.animations.play('left');
@@ -435,10 +396,8 @@ Game.prototype = {
 
         //this is here to simulate winning the game, need to go to game.state(win) once set up
         if (this.tokensToCollect + this.collectedTokens === this.collectedTokens) {
-            // console.log('you win');
             //calls function to increase the level
             this.levelUp();
-            // this.gameOver();
         }
     },
 
@@ -449,10 +408,8 @@ Game.prototype = {
         // Add and update the score and the number of tokens collected and left to collect
         this.collectedTokens++;
         this.tokensToCollect--;
-        // console.log('this.score',this.score);
         this.score += 10;
         totalScore = this.score;
-        // console.log('game.score', game.score);
         //this sets the upper right corner left to collect
         this.leftToCollect.text = ' x ' + this.tokensToCollect;
         this.leftToCollect.cssFont = 'bold 50pt Arial';
@@ -460,10 +417,6 @@ Game.prototype = {
 
     // this function is called when the player collides with an enemy
     checkCollision: function(player, enemy) {
-        // console.log("checking for collision");
-        // this.input.keyboard.enabled = false;
-        // player.animations.frame = 4;
-        // player.animations.paused = true;
 
         // make player "react" to the collision
         player.body.velocity.y = -200;
@@ -490,7 +443,6 @@ Game.prototype = {
     },
 
     gameOver: function(player) {
-        // console.log("gameover");
         // player.kill();
         window.navigator.vibrate([2000]);
         totalScore = 0;
@@ -508,7 +460,6 @@ Game.prototype = {
         this.tokensToCollect = 5;
         //increases the level
         nextLevel++;
-        // console.log('this is currentLevel', nextLevel);
 
         //starts the levelup state
         transitionPlugin.to("LevelUp");
@@ -544,7 +495,6 @@ Game.prototype = {
             this.player.alpha = newAlpha;
             this.game.enemies.setAll('alpha', newAlpha);
             this.game.tokensToCollect.setAll('alpha', newAlpha);
-            // clouds.alpha = newAlpha;
             this.backgroundImage.alpha = newAlpha;
         }
     },
@@ -567,7 +517,6 @@ Game.prototype = {
         this.player.alpha = newAlpha;
         this.game.enemies.setAll('alpha', newAlpha);
         this.game.tokensToCollect.setAll('alpha', newAlpha);
-        // clouds.alpha = newAlpha;
         this.backgroundImage.alpha = newAlpha;
 
     },
