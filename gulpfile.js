@@ -30,7 +30,7 @@ var paths = {
     css: [
             'public_html/css/**/*.css',
             'public_html/assets/style/**/*.css'
-        ]
+    ]
         //will need to add style.css at root to this task, or can combine with other style/css
 };
 
