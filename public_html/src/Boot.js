@@ -45,9 +45,11 @@ Boot.prototype = {
         }
 
         // this block centers game on screen
-        var ow = parseInt(this.game.canvas.style.width, 10); // outer width, parseInt needs a string argument, returns integer for outer width
+        var ow = parseInt(this.game.canvas.style.width, 10); 
+        // outer width, parseInt needs a string argument, returns integer for outer width
         var oh = parseInt(this.game.canvas.style.height, 10); // outer height
-        var r = Math.max(window.innerWidth / ow, window.innerHeight / oh); // max ratio between (inner and outer width; inner and outer height)
+        var r = Math.max(window.innerWidth / ow, window.innerHeight / oh); 
+        // max ratio between (inner and outer width; inner and outer height)
         var nw = ow * r; // new width; outer width * ratio
         var nh = oh * r; // new height
         this.game.canvas.style.width = nw + 'px'; // set new width
@@ -56,13 +58,14 @@ Boot.prototype = {
         this.game.canvas.style.marginLeft = (window.innerWidth / 2 - nw / 2) + 'px';
         this.game.canvas.style.marginTop = (window.innerHeight / 2 - nh / 2) + 'px';
         document.getElementById('game').style.width = window.innerWidth + 'px';
-        document.getElementById('game').style.height = window.innerHeight - 1 + 'px'; //css for body includes 1px top margin that we want to eliminate
+        document.getElementById('game').style.height = window.innerHeight - 1 + 'px'; 
+        //css for body includes 1px top margin that we want to eliminate
         document.getElementById('game').style.overflow = 'hidden';
     },
 
     preload: function(game) {
 
-        //  Here we load the assets required for our preloader (in this case a background and a loading bar)
+        //  Here we load the assets required for our preloader 
         if (window.deviceAssetSize === 'desktop') {
             game.load.image('stars', 'assets/images/2.png');
         } else if (window.deviceAssetSize === '1024x768') {
@@ -83,20 +86,11 @@ Boot.prototype = {
         game.load.script("WebFont", "vendor/webfontloader.js");
         game.load.script('MainMenu', 'src/MainMenu.js');
 
-
     },
 
     create: function(game) {
 
         game.state.start('Preloader');
-
-    },
-
-    gameResized: function(width, height) {
-
-        //  This could be handy if you need to do any extra processing if the game resizes.
-        //  A resize could happen if for example swapping orientation on a device or resizing the browser window.
-        //  Note that this callback is only really useful if you use a ScaleMode of RESIZE and place it inside your main game state.
 
     },
 
@@ -116,6 +110,3 @@ Boot.prototype = {
 
     }
 };
-
-//this.game.state.add('Preloader', Preloader);
-//this.game.state.start('Preloader');

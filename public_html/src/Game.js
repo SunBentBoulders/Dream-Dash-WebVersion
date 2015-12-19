@@ -3,7 +3,7 @@ var Game = function(game) {
     //add in the plugin for transitions
     var transitionPlugin = game.plugins.add(Phaser.Plugin.StateTransition);
     transitionPlugin.settings = {
-        // how long the animation should take
+        // length of animation
         duration: 2000,
         // ease property
         ease: Phaser.Easing.Quadratic.Out,
@@ -15,19 +15,20 @@ var Game = function(game) {
     };
     transitionPlugin;
 
-    // the main character
+    // define the player
     this.player;
-    // these are the enemy sprites, was this.stars
+    // define the enemy sprite group
     this.enemies;
-    // these are the stars for the player to collect, this number will display and count down, was this.tokensToCollect
+    // clocks for the player to collect, number will display and decrement, was this.tokensToCollect
     this.tokensToCollect = 5;
-    // this is the group of 'life' sprites for the player to collect
+    //group of candle sprites for the player to collect to gain lives
     this.livesToCollect;
     // this is the number of tokens that have been collected
     this.collectedTokens = 0;
-    //sets the score at the beginning of the game
+    //sets the beginning score
     this.score = 0;
-    game.scrollableWidth = game.width * 2.5; // same as 2000 but in relation to the game.width
+    game.scrollableWidth = game.width * 2.5; 
+    // same as 2000 but in relation to the game.width
     this.right = 1;
     this.left = 0;
     var clouds;
@@ -35,13 +36,13 @@ var Game = function(game) {
     var pause;
     var pausedText;
     var totalScore;
-    // this keeps track of the current level (1 through 5) that the player is on
+    // tracks current level that the player is on
     this.currentLevel = 1;
     game.currentLevel = this.currentLevel;
     nextLevel = 1;
-    //sets the players invinicibiliy for when it get hits by enemy
+    //sets player invincibility when hit by an enemy
     playerInvincible = false;
-    //sets the players lifesLost to be false
+    //sets the player's livesLost as false to start
     playerLostLife = false;
     this.backgroundImage;
 };
@@ -49,12 +50,12 @@ var Game = function(game) {
 Game.prototype = {
 
     preload: function(game) {
-        //checks to see if vibrate is available, and if so, activates it
+        //checks for vibration and wil activate if available
         if ("vibrate" in window.navigator) {
             // console.log('vibrate is on');
         }
 
-        // load the rest of the game assets. see preload gamestate for others
+        // load the rest of the game assets not already in Preloader state
         // game.load.image('clouds', 'img/cloud.png');
         game.load.image('enemy', 'img/friendlyGhost.png');
         game.load.image('life', 'img/candle.png');
@@ -69,12 +70,14 @@ Game.prototype = {
         //adds in transitions
         transitionPlugin = game.plugins.add(Phaser.Plugin.StateTransition);
         transitionPlugin.settings = {
-            // how long the animation should take
+            // sets animation length
             duration: 2000,
             // ease property
             ease: Phaser.Easing.Quadratic.Out,
-            /* default ease */
-            // what property should be tweened
+             /*
+             default ease 
+             what property should be tweened
+             */
             properties: {
                 alpha: 0
             }
@@ -82,38 +85,41 @@ Game.prototype = {
 
         this.backgroundImage = game.add.sprite(0, 0, 'game-bg');
 
-        //  We're going to be using physics, so enable the Arcade Physics system
+        //  Enables the Arcade Physics system for game
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        // creates infinite tiling of the cloud image
-        // clouds = game.add.tileSprite(0,0,game.scrollableWidth,game.height, 'clouds');
-        // set the scroll speed for the background image
-        // backgroundScroll = 1;
+        /* creates infinite tiling of the cloud image
+         clouds = game.add.tileSprite(0,0,game.scrollableWidth,game.height, 'clouds');
+         set the scroll speed for the background image
+         backgroundScroll = 1;
+         */
 
 
         // this is for the game menu
         this.stage.disableVisibilityChange = false;
 
-        // code for the plain background
-        // ==================================
-        // set background color
-        // this.stage.backgroundColor = 0x00007f;
-        // add horizon line
-        // var graphics = game.add.graphics(0,0);
-        // graphics.beginFill(0x000019);
-        // graphics.lineStyle(2, 0x000019, 1);
-        // syntax: top left x, top left y, width, height
-        // graphics.drawRect(0, game.height/2, game.scrollableWidth, game.height);
-        // graphics.endFill();
-        // ==================================
+         /*
+         code for the plain background
+         ==================================
+         set background color
+         this.stage.backgroundColor = 0x00007f;
+         add horizon line
+         var graphics = game.add.graphics(0,0);
+         graphics.beginFill(0x000019);
+         graphics.lineStyle(2, 0x000019, 1);
+         syntax: top left x, top left y, width, height
+         graphics.drawRect(0, game.height/2, game.scrollableWidth, game.height);
+         graphics.endFill();
+         ==================================
 
 
-        // add main sprites to screen
-        //===================================================
-        // add group of enemy stars
+         add main sprites to screen
+        ===================================================
+         add group of enemy stars
+         */
         game.enemies = game.add.group();
         game.enemyCount = 0;
 
-        // add group of tokens to collect
+        // adds group of tokens to collect
         game.tokensToCollect = game.add.group();
         game.tokensToCollect.enableBody = true;
         game.collectedTokens = 0;
@@ -124,16 +130,18 @@ Game.prototype = {
 
         // add player to game
         this.player = game.add.sprite(game.scrollableWidth / 2, game.height / 2, 'dude');
-        // this.player.scale.setTo(1.5, 1.5);
-        // set initial location of player in the top center of screen
+        /* 
+        this.player.scale.setTo(1.5, 1.5);
+         set initial location of player in the top center of screen
+         */
         this.player.anchor.setTo(.5, 1);
-        // enable physics on the player
+        // enables physics on the player
         game.physics.arcade.enable(this.player);
-        // set the bounding box size of the physics body for collision detection
+        // sets the bounding box size of the physics body for collision detection
         this.player.enableBody = true;
         this.player.body.width = 45;
         this.player.body.height = 95;
-        //  Player physics properties. Give the little guy a slight bounce.
+        //  Player physics properties that give the player a slight bounce
         this.player.body.collideWorldBounds = true;
         this.player.body.bounce.y = 0.4;
         this.player.body.bounce.x = 0.2;
@@ -141,7 +149,7 @@ Game.prototype = {
         //===================================================
 
 
-        //  Create an enemy inside of the 'enemies' group
+        //  creates an enemy inside of the 'enemies' group
         game.addEnemy = function() {
             game.enemyCount++;
             // console.log("addEnemy enemyCount", game.enemyCount);
@@ -149,7 +157,7 @@ Game.prototype = {
             var enemy = game.enemies.create(game.camera.view.randomX, game.height / 2, 'enemy');
             enemy.scale.setTo(0);
             enemy.anchor.setTo(0.5);
-            // modify physics body of enemy sprites
+            // modifies physics body of enemy sprites
             game.physics.arcade.enable(game.enemies);
             game.enemies.enableBody = true;
             enemy.body.setSize(150, 250);
@@ -157,7 +165,7 @@ Game.prototype = {
             // TODO: make enemies move with physics velocity instead of position tween
             game.physics.arcade.moveToXY(enemy, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
 
-            // add a tween that scales the enemy sizes
+            // adds a tween that scales the enemy sizes
             var scaleTween = game.add.tween(enemy.scale);
             var timeToTween = 9000;
             // scales enemy from size 0 to full size
@@ -166,14 +174,14 @@ Game.prototype = {
                 y: 1
             }, timeToTween, Phaser.Easing.Exponential.In, true);
 
-            // add a tween that changes the position of the enemy
+            // adds a tween that changes the position of the enemy
             var positionTween = game.add.tween(enemy.position);
-            // stars move to random x coordinates of screen
+            // enemies move to random x coordinates of screen
             positionTween.to({
                     x: Math.random() * game.scrollableWidth,
                     y: this.height * 1.5
                 }, timeToTween, Phaser.Easing.Exponential.In, true)
-                // this function gets called once tween is complete - will kill enemies once tween is complete and they are off screen
+                // below function gets called and kills enemies once tween is complete and they are off screen
             positionTween.onComplete.add(function() {
                 // game.enemyCount--;
                 enemy.kill();
@@ -188,14 +196,16 @@ Game.prototype = {
             // uncomment the following line to test the difficulty of a specific level
             // game.currentLevel = 10;
             game.addEnemy();
-            // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
+            // call the addEnemyTimer function to add a new enemy after a random time elapse
             game.dropTimer.add(Phaser.Timer.SECOND * Math.random() / nextLevel * 3.5, game.addEnemyTimer, this);
         };
         game.addEnemyTimer();
 
-        // add tokens for player to collect and get points
-        //=======================================================
-        //  Create a token inside of the 'tokensToCollect' group
+       /*  
+        add tokens for player to collect and get points
+        =======================================================
+        Create a token inside of the 'tokensToCollect' group
+        */
         game.addTokenToCollect = function() {
             // game.collectedTokens++;
             // console.log("addTokenToCollect collectedTokens", game.collectedTokens);
@@ -227,12 +237,11 @@ Game.prototype = {
             positionTween.onComplete.add(function() {
                 // game.collectedTokens--;
                 token.kill();
-                // console.log("token killed, collectedTokens is", game.collectedTokens)
 
             });
         };
 
-        // dropTimerForToken and addTokenTimer are used to generate tokens at random intervals
+        // dropTimerForToken and addTokenTimer generate tokens at random intervals
         game.dropTimerForToken = game.time.create(false);
         game.dropTimerForToken.start();
         game.addTokenTimer = function() {
@@ -245,9 +254,11 @@ Game.prototype = {
 
 
 
-        // add lives for player to collect
-        //=======================================================
-        //  Create a life inside of the 'livesToCollect' group
+        /* 
+        add lives for player to collect
+        =======================================================
+        Create a life inside of the 'livesToCollect' group
+        */
         game.addLifeToCollect = function() {
             var life = game.livesToCollect.create(game.camera.view.randomX, game.height / 2, 'life');
             life.scale.setTo(0);
@@ -286,11 +297,11 @@ Game.prototype = {
 
 
 
-        // Our two animations, walking left and right.
+        // Our two animations walking left and right.
         this.player.animations.add('left', [0, 1, 2, 3, 2, 1], 12, true);
         this.player.animations.add('right', [5, 6, 7, 8, 7, 6], 12, true);
 
-        // The score=============================================
+        // Score=============================================
         // will add this back once level up game state is made
         // this.scoreText = game.add.text(this.realPlayer.x-400, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
         // this.scoreText.fixedToCamera = true;
@@ -310,9 +321,8 @@ Game.prototype = {
         }
         this.scoreSprite.fixedToCamera = true;
         this.leftToCollect.fixedToCamera = true;
-        //=====================================================
 
-        //this will be the life bar
+        //Life bar=======================================
         var lifeDistance = this.game.width / 8
         this.life1 = game.add.sprite(lifeDistance, this.game.height / 37.5, 'life');
         this.life1.scale.setTo(.20);
@@ -327,22 +337,21 @@ Game.prototype = {
 
 
 
-        // Our controls.=======================================
+        // Controls =======================================
         cursors = game.input.keyboard.createCursorKeys();
-        //set the world to be wider behind the frame
+        //sets the world to be wider behind the frame
         game.world.setBounds(0, 0, game.scrollableWidth, game.height);
         game.camera.follow(this.player, Phaser.Camera.FOLLOW_LOCKON);
         this.player.body.collideWorldBounds = true;
         this.player.collideWorldBounds = true;
-        //========================================================
 
 
-        //add pause button ============================
+        //Pause button ============================
         pause = game.add.button(this.game.width / 50, this.game.height / 37.5, 'pause');
         pause.fixedToCamera = true;
         pause.inputEnabled = true;
         pause.events.onInputUp.add(function() {
-            //this is the game paused text
+            //Pause game text
             console.log("game.camera", game.camera)
             pausedText = game.add.text(game.camera.view.centerX, game.height / 2, "Paused", {
                 font: '200px Arial',
@@ -352,7 +361,7 @@ Game.prototype = {
             game.paused = true;
         });
         game.input.onDown.add(function() {
-            //unpauses the game
+            //Unpause game
             if (game.paused) {
                 pausedText.destroy();
                 game.paused = false;
@@ -362,14 +371,6 @@ Game.prototype = {
     },
 
     update: function(game) {
-        //make the background scroll==================================
-        // clouds.tilePosition.y += backgroundScroll;
-        //  Collide the player and the stars with the platforms
-        // game.physics.arcade.collide(this.player, game.enemies,this.gameOver, null, this);
-        // game.physics.arcade.collide(this.stars, platforms);
-        //=======================================================
-
-
 
         // collisions/collections===============================
         //Check to see if tokensTocollect is collected if so, run collectToken
@@ -382,13 +383,10 @@ Game.prototype = {
         game.physics.arcade.collide(this.player, game.enemies, null, this.checkCollision, this);
         //=====================================================
 
-
-
         // Reset the players velocity (movement)
         this.player.body.velocity.x = 0;
 
-
-        // controls=========================================
+        // Controls=========================================
         //checks to see if the keyboard is being used
         // console.log('the keyboard is enabled',game.input.keyboard.enabled);
         //check to see if finger is touching screen
@@ -396,11 +394,11 @@ Game.prototype = {
         //this is for computer input
         if (game.device.desktop) {
             if (cursors.left.isDown) {
-                //  Move to the left
+                //  Move left
                 this.player.body.velocity.x = -400;
                 this.player.animations.play('left');
             } else if (cursors.right.isDown) {
-                //  Move to the right
+                //  Move right
                 this.player.body.velocity.x = 400;
                 this.player.animations.play('right');
             } else {
@@ -431,11 +429,8 @@ Game.prototype = {
         }
         //==================================================
 
-
-
         //this is here to simulate winning the game, need to go to game.state(win) once set up
         if (this.tokensToCollect + this.collectedTokens === this.collectedTokens) {
-            // console.log('you win');
             //calls function to increase the level
             this.levelUp();
             // this.gameOver();
@@ -446,43 +441,43 @@ Game.prototype = {
         // Removes the token from the screen
         token.kill();
 
-        // Add and update the score and the number of tokens collected and left to collect
+        // Add and update the score, set number of tokens collected and left to collect
         this.collectedTokens++;
         this.tokensToCollect--;
         // console.log('this.score',this.score);
         this.score += 10;
         totalScore = this.score;
         // console.log('game.score', game.score);
-        //this sets the upper right corner left to collect
+        //Upper right corner display of left to collect
         this.leftToCollect.text = ' x ' + this.tokensToCollect;
         this.leftToCollect.cssFont = 'bold 50pt Arial';
     },
 
     // this function is called when the player collides with an enemy
     checkCollision: function(player, enemy) {
-        // console.log("checking for collision");
-        // this.input.keyboard.enabled = false;
-        // player.animations.frame = 4;
-        // player.animations.paused = true;
+        /* console.log("checking for collision");
+         this.input.keyboard.enabled = false;
+         player.animations.frame = 4;
+         player.animations.paused = true;
 
-        // make player "react" to the collision
+         make player "react" to the collision*/
         player.body.velocity.y = -200;
         this.loseLife();
     },
 
-    // // this function for debugging only
-    // render: function(game) {
-    //   // this.game.debug.bodyInfo(this.player, 32, 32);
-    //   this.game.debug.body(this.player);
-    //   this.game.enemies.forEachAlive(this.renderGroup, this);
-    //   this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
-    //   this.game.livesToCollect.forEachAlive(this.renderGroup, this);
-    // },
+   /*  // this function for debugging only
+     render: function(game) {
+       // this.game.debug.bodyInfo(this.player, 32, 32);
+       this.game.debug.body(this.player);
+       this.game.enemies.forEachAlive(this.renderGroup, this);
+       this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
+       this.game.livesToCollect.forEachAlive(this.renderGroup, this);
+     },*/
 
-    // // this function for debugging groups of sprites only
-    // renderGroup: function(member) {
-    //   this.game.debug.body(member);
-    // },
+    /* // this function for debugging groups of sprites only
+     renderGroup: function(member) {
+       this.game.debug.body(member);
+     },*/
 
     collectLife: function(player, life) {
         life.kill();
@@ -497,7 +492,7 @@ Game.prototype = {
         // reset world bounds to the original 800x600 so following gamestates show up correctly
         this.world.setBounds(0, 0, this.game.width, this.game.height);
 
-        // // go to gameover state
+        // go to gameover state
         transitionPlugin.to("GameOver");
     },
 
@@ -510,7 +505,7 @@ Game.prototype = {
         nextLevel++;
         // console.log('this is currentLevel', nextLevel);
 
-        //starts the levelup state
+        //starts the LevelUp state
         transitionPlugin.to("LevelUp");
         //resets the world bounds
         this.world.setBounds(0, 0, this.game.width, this.game.height);
@@ -531,13 +526,13 @@ Game.prototype = {
                 this.game.time.events.add(3000, this.toggleInvincible, this);
             } else if (this.life2.visible) {
                 var newAlpha = 0.6;
-                //makes second life dissapear
+                //makes 2nd life disappear
                 this.life2.visible = false;
                 this.toggleInvincible();
                 window.navigator.vibrate([1000]);
                 this.game.time.events.add(5000, this.toggleInvincible, this);
             } else {
-                //once player loses last life, end the game
+                //Ends the game once player loses last life
                 this.gameOver();
             }
             // set new alphas on sprites

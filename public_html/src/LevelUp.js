@@ -130,7 +130,7 @@ LevelUp.prototype = {
             });
         }
         //=========================================
-        //makes clocks pop out on game win
+        //makes clocks pop out on LevelUp state
         emitter = game.add.emitter(game.world.centerX, 200, 200);
         emitter.makeParticles('clock');
         emitter.start(true, 4000, null, totalScore);

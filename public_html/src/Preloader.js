@@ -81,8 +81,6 @@ Preloader.prototype = {
             game.load.image('Options', 'assets/buttons/optionsButton85pt.png');
             game.load.image('Credits', 'assets/buttons/creditsButton85pt.png');
         }
-        // game.load.image()
-
 
         game.load.spritesheet('dude', 'img/dude.png', 32, 48);
 
