@@ -223,9 +223,9 @@ Game.prototype = {
         };
 
         // dropTimerForToken and addTokenTimer are used to generate tokens at random intervals
+        game.addTokenTimer = function() {
         game.dropTimerForToken = game.time.create(false);
         game.dropTimerForToken.start();
-        game.addTokenTimer = function() {
             game.addTokenToCollect();
             // after adding a token, call the addTokenTimer function again after a random amount of time elapses
             game.dropTimer.add(Phaser.Timer.SECOND * Math.random() * 5, game.addTokenTimer, this);
@@ -265,9 +265,9 @@ Game.prototype = {
         }
 
         // dropTimer and addLifeTimer are used to generate lives at random intervals
+        game.addLifeTimer = function() {
         game.dropTimerForLives = game.time.create(false);
         game.dropTimerForLives.start();
-        game.addLifeTimer = function() {
             game.addLifeToCollect();
             game.dropTimer.add(Phaser.Timer.SECOND * Math.random() / nextLevel * 20, game.addLifeTimer, this);
         }
