@@ -3,7 +3,7 @@
 	<h2>Meet the development team</h2>
 	<div ng-repeat="developer in data.developerInfo" class="eachDeveloper">
 		<h3>{{developer.name}}</h3>
-		<img src="{{developer.pictureSrc}}"></img>
+		<img ng-src="{{developer.pictureSrc}}"></img>
 		<h4>{{developer.github}}</h4>
 		<h4>{{developer.email}}</h4>
 		<h4>{{developer.linkedin}}</h4>
