@@ -8,14 +8,7 @@ angular.module('dreamDash.game', [
 .controller('GameController', ['$scope', function($scope) {
 	console.log("inside GameController");
 
-	// TODO: clean up game/destroy game when user leaves game view
-	$scope.$on('$destroy', function() {
-		console.log("destroying game");
-		// uncomment this when game is added
-		// game.destroy();
-	})
 }])
-
 // this is the directive to run the game
 // best practice to add custom prefix to directives to avoid future collisions
 .directive('myGamecanvas', ['$injector', function($injector) {
