@@ -1,1 +1,23 @@
-<div>This is the info view</div>
+<div id="info">
+	<h1>So who is behind Dream Dash?</h1>
+	<h2>Meet the development team</h2>
+	<div ng-repeat="developer in data.developerInfo" class="eachDeveloper">
+		<h3>{{developer.name}}</h3>
+		<img src="{{developer.pictureSrc}}"></img>
+		<h4>{{developer.github}}</h4>
+		<h4>{{developer.email}}</h4>
+		<h4>{{developer.linkedin}}</h4>
+		<h4>{{developer.blog}}</h4>
+		<h4>{{developer.bio}}</h4>
+	</div>
+
+
+
+
+
+
+
+
+</div>
+
+

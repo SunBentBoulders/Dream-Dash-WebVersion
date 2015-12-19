@@ -1,6 +1,6 @@
 angular.module('dreamDash.factories', [])
 
-.factory('DeveloperInfo', function(){
+.factory('DeveloperInfoFactory', function(){
 	var getDeveloperInfo = {
 		"dev1": {
 			"name": "Shanna Sullivan",
