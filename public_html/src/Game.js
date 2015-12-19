@@ -141,47 +141,123 @@ Game.prototype = {
         //===================================================
 
 
-        //  Create an enemy inside of the 'enemies' group
-        game.addEnemy = function() {
-            // create enemy that starts invisible with a size of 0
-            var enemy = game.enemies.create(game.camera.view.randomX, game.height / 2, 'enemy');
-            enemy.scale.setTo(0);
-            enemy.anchor.setTo(0.5);
-            // modify physics body of enemy sprites
-            game.physics.arcade.enable(game.enemies);
-            game.enemies.enableBody = true;
-            enemy.body.setSize(150, 250);
 
-            // TODO: make enemies move with physics velocity instead of position tween
-            // game.physics.arcade.moveToXY(enemy, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
 
-            // add a tween that scales the enemy sizes
-            var scaleTween = game.add.tween(enemy.scale);
-            var timeToTween = 9000;
-            // scales enemy from size 0 to full size
-            scaleTween.to({ x: 1, y: 1}, timeToTween, Phaser.Easing.Exponential.In, true);
+// this function creates the sprites when called and sets the sprite properties
+game.addSprite = function(className, spriteName, bodySizeX, bodySizeY, timeToTween) { // e.g. game.enemies, enemy, 150, 250, 9000
+    // create sprite that starts invisible with a size of 0
+    var sprite = className.create(game.camera.view.randomX, game.height / 2, spriteName);
+    sprite.scale.setTo(0);
+    sprite.anchor.setTo(0.5);
+    // modify physics body of sprites
+    game.physics.arcade.enable(className);
+    className.enableBody = true;
+    sprite.body.setSize(bodySizeX, bodySizeY);
 
-            // add a tween that changes the position of the enemy
-            var positionTween = game.add.tween(enemy.position);
-            // enemies move to random x coordinates of screen
-            positionTween.to({ x: Math.random() * game.scrollableWidth, y: this.height * 1.5}, timeToTween, Phaser.Easing.Exponential.In, true)
-                // this function gets called once tween is complete - will kill enemies once tween is complete and they are off screen
-            positionTween.onComplete.add(function() {
-                enemy.kill();
-            });
-        };
+    // TODO: make sprites move with physics velocity instead of position tween
+    // game.physics.arcade.moveToXY(spriteName, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
 
-        // dropTimer and addEnemyTimer are used to generate enemies at random intervals
-        game.addEnemyTimer = function() {
-            game.dropTimer = game.time.create(false);
-            game.dropTimer.start();
-            // uncomment the following line to test the difficulty of a specific level
-            // game.currentLevel = 10;
-            game.addEnemy();
-            // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
-            game.dropTimer.add(Phaser.Timer.SECOND * Math.random() / nextLevel * 3.5, game.addEnemyTimer, this);
-        };
-        game.addEnemyTimer();
+    // add a tween that scales the sprite sizes
+    var scaleTween = game.add.tween(sprite.scale);
+    // scales sprite from size 0 to full size
+    scaleTween.to({ x: 1, y: 1}, timeToTween, Phaser.Easing.Exponential.In, true);
+
+    // add a tween that changes the position of the sprite
+    var positionTween = game.add.tween(sprite.position);
+    // sprites move to random x coordinates of screen
+    positionTween.to({ x: Math.random() * game.scrollableWidth, y: this.height * 1.5}, timeToTween, Phaser.Easing.Exponential.In, true);
+    // this function gets called once tween is complete - will kill sprites once tween is complete and they are off screen
+    positionTween.onComplete.add(function() {
+        spriteName.kill();
+    });
+};
+
+// this function adds sprites based on a set interval of time
+game.addSpriteTimer = function(className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval) {
+    // add and start a phaser timer
+    game.dropTimer = game.time.create(false);
+    game.dropTimer.start();
+    // add a sprite
+    game.addSprite(className, spriteName, bodySizeX, bodySizeY, timeToTween);
+    // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
+    game.dropTimer.add(Phaser.Timer.SECOND * timerInterval, game.addSpriteTimer, this);
+};
+// parameters: className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval
+// add enemies to game
+game.addSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, Math.random() / nextLevel * 3.5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // //  Create an enemy inside of the 'enemies' group
+        // game.addEnemy = function() {
+        //     // create enemy that starts invisible with a size of 0
+        //     var enemy = game.enemies.create(game.camera.view.randomX, game.height / 2, 'enemy');
+        //     enemy.scale.setTo(0);
+        //     enemy.anchor.setTo(0.5);
+        //     // modify physics body of enemy sprites
+        //     game.physics.arcade.enable(game.enemies);
+        //     game.enemies.enableBody = true;
+        //     enemy.body.setSize(150, 250);
+
+        //     // TODO: make enemies move with physics velocity instead of position tween
+        //     // game.physics.arcade.moveToXY(enemy, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
+
+        //     // add a tween that scales the enemy sizes
+        //     var scaleTween = game.add.tween(enemy.scale);
+        //     var timeToTween = 9000;
+        //     // scales enemy from size 0 to full size
+        //     scaleTween.to({ x: 1, y: 1}, timeToTween, Phaser.Easing.Exponential.In, true);
+
+        //     // add a tween that changes the position of the enemy
+        //     var positionTween = game.add.tween(enemy.position);
+        //     // enemies move to random x coordinates of screen
+        //     positionTween.to({ x: Math.random() * game.scrollableWidth, y: this.height * 1.5}, timeToTween, Phaser.Easing.Exponential.In, true)
+        //         // this function gets called once tween is complete - will kill enemies once tween is complete and they are off screen
+        //     positionTween.onComplete.add(function() {
+        //         enemy.kill();
+        //     });
+        // };
+
+        // // dropTimer and addEnemyTimer are used to generate enemies at random intervals
+        // game.addEnemyTimer = function() {
+        //     game.dropTimer = game.time.create(false);
+        //     game.dropTimer.start();
+        //     // uncomment the following line to test the difficulty of a specific level
+        //     // game.currentLevel = 10;
+        //     game.addEnemy();
+        //     // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
+        //     game.dropTimer.add(Phaser.Timer.SECOND * Math.random() / nextLevel * 3.5, game.addEnemyTimer, this);
+        // };
+        // game.addEnemyTimer();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // add tokens for player to collect and get points
         //=======================================================
