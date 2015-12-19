@@ -123,11 +123,12 @@ Credits.prototype = {
 
         this.game.stage.disableVisibilityChange = true;
 
+        /*
         if (gameOptions.playMusic) {
-            //      musicPlayer.stop();
-            //      musicPlayer = game.add.audio('exit');
-            //      musicPlayer.play();
-        }
+                  musicPlayer.stop();
+                  musicPlayer = game.add.audio('exit');
+                  musicPlayer.play();
+        }*/
 
         var bg = this.game.add.sprite(0, 0, 'gameover-bg');
 

@@ -14,7 +14,7 @@ Options.prototype = {
     },
 
     preload: function(game) {
-        //loads up buttons for game over screen, smaller buttons for 960x640
+        //loads up buttons for GameOver state, smaller buttons for 960x640
         if (window.deviceAssetSize === '960x640') {
             game.load.image('< Back', 'assets/buttons/backButton40pt.png');
             game.load.image('Mute Music', 'assets/buttons/muteMusicButton40pt.png');
