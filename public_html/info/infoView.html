@@ -3,12 +3,23 @@
 	<h2>Meet the development team</h2>
 	<div ng-repeat="developer in data.developerInfo" class="eachDeveloper">
 		<h3>{{developer.name}}</h3>
+
 		<img ng-src="{{developer.pictureSrc}}"></img>
-		<h4>{{developer.github}}</h4>
-		<h4>{{developer.email}}</h4>
-		<h4>{{developer.linkedin}}</h4>
-		<h4>{{developer.blog}}</h4>
-		<h4>{{developer.bio}}</h4>
+
+		<h4>Github: </h4>
+			<p><a href="https://github.com/{{developer.github}}">{{developer.github}}</a></p>
+
+		<h4>Email: </h4>
+			<p><a href="mailto: {{developer.email}}">{{developer.email}}</a></p>
+
+		<h4>Linkedin: </h4>
+			<p><a href="https://www.linkedin.com/in/{{developer.linkedin}}">www.linkedin.com/in/{{developer.linkedin}}</a><p>
+
+		<h4>Blog: </h4>
+			<p><a href="{{developer.blog}}">{{developer.blog}}</a></p>
+
+		<h4>Bio</h4>
+			<p>{{developer.bio}}</p>
 	</div>
 
 
