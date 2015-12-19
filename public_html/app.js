@@ -4,7 +4,8 @@ angular.module('dreamDash', [
 	'ui.router',
 	'dreamDash.game',
 	'dreamDash.info',
-	'dreamDash.aboutDreamDash'
+	'dreamDash.aboutDreamDash',
+	'dreamDash.factories'
 	])
 
 // config adds states that correspond with templates and controllers for each view
