@@ -3,7 +3,7 @@ Game = {
     score: 0,
 
     /* If the music in your game needs to play through-out a few State swaps, then you could reference it here */
-//    music: null,
+    //    music: null,
 
     /* Your game can check Game.orientated in internal loops to know if it should pause or not */
     orientated: false
@@ -13,15 +13,14 @@ Game = {
 var gameOptions = {
     playSound: true,
     playMusic: true
-  };
+};
 var musicPlayer;
 
-Boot = function (game) {
-};
+Boot = function(game) {};
 
 Boot.prototype = {
 
-    init: function () {
+    init: function() {
 
         this.input.maxPointers = 1;
         this.stage.disableVisibilityChange = true;
@@ -48,20 +47,20 @@ Boot.prototype = {
         // this block centers game on screen
         var ow = parseInt(this.game.canvas.style.width, 10); // outer width, parseInt needs a string argument, returns integer for outer width
         var oh = parseInt(this.game.canvas.style.height, 10); // outer height
-        var r = Math.max(window.innerWidth/ow, window.innerHeight/oh); // max ratio between (inner and outer width; inner and outer height)
-        var nw = ow*r; // new width; outer width * ratio
-        var nh = oh*r; // new height
+        var r = Math.max(window.innerWidth / ow, window.innerHeight / oh); // max ratio between (inner and outer width; inner and outer height)
+        var nw = ow * r; // new width; outer width * ratio
+        var nh = oh * r; // new height
         this.game.canvas.style.width = nw + 'px'; // set new width
         this.game.canvas.style.height = nh + 'px';
         // console.log("style", this.game.canvas.style.marginLeft)
-        this.game.canvas.style.marginLeft = (window.innerWidth/2 - nw/2) + 'px';
-        this.game.canvas.style.marginTop = (window.innerHeight/2 - nh/2) + 'px';
+        this.game.canvas.style.marginLeft = (window.innerWidth / 2 - nw / 2) + 'px';
+        this.game.canvas.style.marginTop = (window.innerHeight / 2 - nh / 2) + 'px';
         document.getElementById('game').style.width = window.innerWidth + 'px';
         document.getElementById('game').style.height = window.innerHeight - 1 + 'px'; //css for body includes 1px top margin that we want to eliminate
         document.getElementById('game').style.overflow = 'hidden';
     },
 
-    preload: function (game) {
+    preload: function(game) {
 
         //  Here we load the assets required for our preloader (in this case a background and a loading bar)
         if (window.deviceAssetSize === 'desktop') {
@@ -87,13 +86,13 @@ Boot.prototype = {
 
     },
 
-    create: function (game) {
+    create: function(game) {
 
         game.state.start('Preloader');
 
     },
 
-    gameResized: function (width, height) {
+    gameResized: function(width, height) {
 
         //  This could be handy if you need to do any extra processing if the game resizes.
         //  A resize could happen if for example swapping orientation on a device or resizing the browser window.
@@ -101,7 +100,7 @@ Boot.prototype = {
 
     },
 
-    enterIncorrectOrientation: function () {
+    enterIncorrectOrientation: function() {
 
         Game.orientated = false;
 
@@ -109,7 +108,7 @@ Boot.prototype = {
 
     },
 
-    leaveIncorrectOrientation: function () {
+    leaveIncorrectOrientation: function() {
 
         Game.orientated = true;
 

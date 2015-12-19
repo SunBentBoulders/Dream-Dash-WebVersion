@@ -28,13 +28,13 @@ var paths = {
     ],
     audio: 'public_html/assets/bgm/**/*',
     css: [
-        'public_html/css/**/*.css',
-        'public_html/assets/style/**/*.css'
+            'public_html/css/**/*.css',
+            'public_html/assets/style/**/*.css'
     ]
-    //will need to add style.css at root to this task, or can combine with other style/css
+        //will need to add style.css at root to this task, or can combine with other style/css
 };
 
-gulp.task('watch', function(){
+gulp.task('watch', function() {
     gulp.watch(paths.scripts, ['scripts']);
     /*
     gulp.watch(paths.images, ['images']);
@@ -43,14 +43,16 @@ gulp.task('watch', function(){
     gulp.watch(paths.css, ['css']);
 });
 
-gulp.task('scripts', function(){
+gulp.task('scripts', function() {
     //output and put script in build folder
     return gulp.src(paths.scripts)
         //concat and uglify scripts
         .pipe(concat('allfiles.js'))
         .pipe(uglify().on('error', gutil.log))
         //rename minified file, then place in public folder
-        .pipe(rename({extname: '.min.js'}))
+        .pipe(rename({
+            extname: '.min.js'
+        }))
         .pipe(gulp.dest('public_html/minified'));
 
 });
@@ -63,11 +65,15 @@ gulp.task('scripts', function(){
 });*/
 
 //TASK to Minify All CSS
-gulp.task('mincss', function(){
+gulp.task('mincss', function() {
     return gulp.src(paths.css)
         /*.pipe(concat('allfiles.css'))*/
-        .pipe(cssmin({compatibility: 'ie8'}))
-        .pipe(rename({extname: '.min.css'}))
+        .pipe(cssmin({
+            compatibility: 'ie8'
+        }))
+        .pipe(rename({
+            extname: '.min.css'
+        }))
         .pipe(gulp.dest('public_html/minified'))
 });
 
