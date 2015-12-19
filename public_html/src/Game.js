@@ -143,8 +143,6 @@ Game.prototype = {
 
         //  Create an enemy inside of the 'enemies' group
         game.addEnemy = function() {
-            game.enemyCount++;
-            // console.log("addEnemy enemyCount", game.enemyCount);
             // create enemy that starts invisible with a size of 0
             var enemy = game.enemies.create(game.camera.view.randomX, game.height / 2, 'enemy');
             enemy.scale.setTo(0);
@@ -155,36 +153,28 @@ Game.prototype = {
             enemy.body.setSize(150, 250);
 
             // TODO: make enemies move with physics velocity instead of position tween
-            game.physics.arcade.moveToXY(enemy, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
+            // game.physics.arcade.moveToXY(enemy, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
 
             // add a tween that scales the enemy sizes
             var scaleTween = game.add.tween(enemy.scale);
             var timeToTween = 9000;
             // scales enemy from size 0 to full size
-            scaleTween.to({
-                x: 1,
-                y: 1
-            }, timeToTween, Phaser.Easing.Exponential.In, true);
+            scaleTween.to({ x: 1, y: 1}, timeToTween, Phaser.Easing.Exponential.In, true);
 
             // add a tween that changes the position of the enemy
             var positionTween = game.add.tween(enemy.position);
-            // stars move to random x coordinates of screen
-            positionTween.to({
-                    x: Math.random() * game.scrollableWidth,
-                    y: this.height * 1.5
-                }, timeToTween, Phaser.Easing.Exponential.In, true)
+            // enemies move to random x coordinates of screen
+            positionTween.to({ x: Math.random() * game.scrollableWidth, y: this.height * 1.5}, timeToTween, Phaser.Easing.Exponential.In, true)
                 // this function gets called once tween is complete - will kill enemies once tween is complete and they are off screen
             positionTween.onComplete.add(function() {
-                // game.enemyCount--;
                 enemy.kill();
-                // console.log("enemy killed, enemyCount is", game.enemyCount)
             });
         };
 
         // dropTimer and addEnemyTimer are used to generate enemies at random intervals
-        game.dropTimer = game.time.create(false);
-        game.dropTimer.start();
         game.addEnemyTimer = function() {
+            game.dropTimer = game.time.create(false);
+            game.dropTimer.start();
             // uncomment the following line to test the difficulty of a specific level
             // game.currentLevel = 10;
             game.addEnemy();
@@ -212,8 +202,8 @@ Game.prototype = {
             var scaleTween = game.add.tween(token.scale);
             var timeToTween = 10000;
             scaleTween.to({
-                x: 2,
-                y: 2
+                x: 1,
+                y: 1
             }, timeToTween, Phaser.Easing.Exponential.In, true);
             // applies to tokens that start on left of screen
 
@@ -308,6 +298,7 @@ Game.prototype = {
             });
             this.leftToCollect.cssFont = 'bold 50pt Arial';
         }
+        this.scoreSprite.scale.setTo(0.5);
         this.scoreSprite.fixedToCamera = true;
         this.leftToCollect.fixedToCamera = true;
         //=====================================================
