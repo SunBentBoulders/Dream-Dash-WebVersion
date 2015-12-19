@@ -8,12 +8,12 @@ angular.module('dreamDash.game', [
 .controller('GameController', function($scope) {
 	console.log("inside GameController");
 
-	// TODO: clean up game/destroy game when user leaves game view
-	$scope.$on('$destroy', function() {
-		console.log("destroying game");
-		// uncomment this when game is added
-		// game.destroy();
-	})
+	// // TODO: clean up game/destroy game when user leaves game view
+	// $scope.$on('$destroy', function() {
+	// 	console.log("destroying game");
+	// 	// uncomment this when game is added
+	// 	// game.destroy();
+	// })
 })
 
 // this is the directive to run the game
