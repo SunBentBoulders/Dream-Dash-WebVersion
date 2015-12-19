@@ -1,6 +1,8 @@
 body {
     margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
     background: #000;
+
+    margin-top: 80px;
 }
 
 #orientation {
@@ -23,3 +25,15 @@ body {
     display: block;
     margin: 0 auto;
  }*/
+ #aboutGame {
+    color: white;
+}
+
+div#aboutGame {
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+#aboutGame img {
+    
+}

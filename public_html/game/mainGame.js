@@ -2,7 +2,7 @@ window.createGame = function(scope, mapId, injector) {
 // console.log("inside createGame")
 
 // this is the code that used to be on the index in the mobile version
-(function() {
+// (function() {
             //  Create your Phaser game and inject it into the game div.
             //  We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
             //  We're using a game size of 1024 x 768 here, but you can use whatever you feel makes sense for your game of course.
@@ -73,5 +73,14 @@ window.createGame = function(scope, mapId, injector) {
             //  Now start the Boot state.
             game.state.start('Boot');
 
-        })();
+            // destroy game when changing views
+            scope.$on('$destroy', function() {
+                console.log("destroying game in mainGame.js")
+                game.destroy();
+            });
+
+        // })();
 }
+
+
+

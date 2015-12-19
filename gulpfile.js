@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -10,16 +11,31 @@ var cssmin = require('gulp-minify-css');
 var mocha = require('gulp-mocha');*/
 
 var paths = {
-    scripts: ['public_html/app.js', 'public_html/aboutGame/**/*.js', 'public_html/info/**/*.js', 'public_html/game/**/*.js', 'public_html/vendor/**/*.js', 'public_html/lib/**/*.js', 'public_html/src/**/*.js'],
-    images: ['public_html/img/**/*', 'public_html/assets/images/**/*', 'public_html/icons/**/*'],
+    scripts: [
+        'public_html/app.js',
+        'public_html/aboutGame/**/*.js',
+        'public_html/info/**/*.js',
+        'public_html/game/**/*.js',
+        'public_html/vendor/**/*.js',
+        'public_html/lib/**/*.js',
+        'public_html/src/**/*.js'
+    ],
+    images: [
+        'public_html/img/**/*',
+        'public_html/assets/images/**/*',
+        'public_html/icons/**/*'
+    ],
     audio: 'public_html/assets/bgm/**/*',
-    css: ['public_html/css/**/*.css', 'public_html/assets/style/**/*.css'] 
+    css: [
+        'public_html/css/**/*.css',
+        'public_html/assets/style/**/*.css'
+    ]
     //will need to add style.css at root to this task, or can combine with other style/css
 };
 
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['scripts']);
-    /*    
+    /*
     gulp.watch(paths.images, ['images']);
     gulp.watch(paths.audio, ['audio']);
     */
@@ -31,11 +47,11 @@ gulp.task('scripts', function(){
     return gulp.src(paths.scripts)
         //concat and uglify scripts
         .pipe(concat('allfiles.js'))
-        .pipe(uglify())
-        //rename minified file, then place in build folder
+        .pipe(uglify().on('error', gutil.log))
+        //rename minified file, then place in public folder
         .pipe(rename({extname: '.min.js'}))
         .pipe(gulp.dest('public_html/minified'));
-        
+
 });
 
 //TASK to Minify All Images - Currently only reduces size by 1.5MB, using API instead
