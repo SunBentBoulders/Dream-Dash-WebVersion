@@ -146,6 +146,7 @@ Game.prototype = {
 // this function creates the sprites when called and sets the sprite properties
 game.addSprite = function(className, spriteName, bodySizeX, bodySizeY, timeToTween) { // e.g. game.enemies, enemy, 150, 250, 9000
     // create sprite that starts invisible with a size of 0
+    console.log("arguments", arguments)
     var sprite = className.create(game.camera.view.randomX, game.height / 2, spriteName);
     sprite.scale.setTo(0);
     sprite.anchor.setTo(0.5);
@@ -168,23 +169,23 @@ game.addSprite = function(className, spriteName, bodySizeX, bodySizeY, timeToTwe
     positionTween.to({ x: Math.random() * game.scrollableWidth, y: this.height * 1.5}, timeToTween, Phaser.Easing.Exponential.In, true);
     // this function gets called once tween is complete - will kill sprites once tween is complete and they are off screen
     positionTween.onComplete.add(function() {
-        spriteName.kill();
+        sprite.kill();
     });
 };
 
 // this function adds sprites based on a set interval of time
-game.addSpriteTimer = function(className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval) {
+game.startSpriteTimer = function(className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval) {
     // add and start a phaser timer
     game.dropTimer = game.time.create(false);
     game.dropTimer.start();
     // add a sprite
     game.addSprite(className, spriteName, bodySizeX, bodySizeY, timeToTween);
     // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
-    game.dropTimer.add(Phaser.Timer.SECOND * timerInterval, game.addSpriteTimer, this);
+    game.dropTimer.add(Phaser.Timer.SECOND * timerInterval, game.startSpriteTimer, this, className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval);
 };
 // parameters: className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval
 // add enemies to game
-game.addSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, Math.random() / nextLevel * 3.5);
+game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, Math.random() / nextLevel * 3.5);
 
 
 
