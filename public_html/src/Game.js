@@ -123,7 +123,7 @@ Game.prototype = {
         game.livesToCollect.enableBody = true;
 
         // add player to game
-        this.player = game.add.sprite(game.scrollableWidth / 2, game.height / 2, 'dude');
+        this.player = game.add.sprite(game.scrollableWidth / 2, game.height / 8 * 5, 'dude');
         // this.player.scale.setTo(1.5, 1.5);
         // set initial location of player in the top center of screen
         this.player.anchor.setTo(.5, 1);
@@ -181,11 +181,18 @@ game.startSpriteTimer = function(className, spriteName, bodySizeX, bodySizeY, ti
     // add a sprite
     game.addSprite(className, spriteName, bodySizeX, bodySizeY, timeToTween);
     // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
-    game.dropTimer.add(Phaser.Timer.SECOND * timerInterval, game.startSpriteTimer, this, className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval);
+    game.dropTimer.add(Phaser.Timer.SECOND * Math.random() * timerInterval, game.startSpriteTimer, this, className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval);
 };
 // parameters: className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval
 // add enemies to game
-game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, Math.random() / nextLevel * 3.5);
+// console.log("currentLevel", currentLevel)
+console.log("game.currentLevel", game.currentLevel)
+console.log("this.currentLevel", this.currentLevel)
+game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, 1 / game.currentLevel * 3.5);
+// add tokens to game for player to collect (clocks)
+game.startSpriteTimer(game.tokensToCollect, 'token', 30, 30, 10000, 5);
+// add lives to game (candles)
+game.startSpriteTimer(game.livesToCollect, 'life', 50, 300, 12000, 25);
 
 
 
@@ -260,96 +267,96 @@ game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, Math.random() / nex
 
 
 
-        // add tokens for player to collect and get points
-        //=======================================================
-        //  Create a token inside of the 'tokensToCollect' group
-        game.addTokenToCollect = function() {
-            // game.collectedTokens++;
-            // console.log("addTokenToCollect collectedTokens", game.collectedTokens);
-            var token = game.tokensToCollect.create(game.camera.view.randomX, game.height / 2, 'token');
-            token.scale.setTo(0);
-            token.anchor.setTo(.5);
-            // modify physics body of token sprites
-            game.physics.arcade.enable(game.collectedTokens);
-            game.collectedTokens.enableBody = true;
-            token.body.setSize(30, 30)
+        // // add tokens for player to collect and get points
+        // //=======================================================
+        // //  Create a token inside of the 'tokensToCollect' group
+        // game.addTokenToCollect = function() {
+        //     // game.collectedTokens++;
+        //     // console.log("addTokenToCollect collectedTokens", game.collectedTokens);
+        //     var token = game.tokensToCollect.create(game.camera.view.randomX, game.height / 2, 'token');
+        //     token.scale.setTo(0);
+        //     token.anchor.setTo(.5);
+        //     // modify physics body of token sprites
+        //     game.physics.arcade.enable(game.collectedTokens);
+        //     game.collectedTokens.enableBody = true;
+        //     token.body.setSize(30, 30)
 
-            // add tween that will make tokens scale up in size to create illusion of perspective
-            // tween syntax: .to( object containing chosen parameter's ending values, time of tween in ms, type of easing to use, "true" value, [optional] onComplete event handler)
-            var scaleTween = game.add.tween(token.scale);
-            var timeToTween = 10000;
-            scaleTween.to({
-                x: 1,
-                y: 1
-            }, timeToTween, Phaser.Easing.Exponential.In, true);
-            // applies to tokens that start on left of screen
+        //     // add tween that will make tokens scale up in size to create illusion of perspective
+        //     // tween syntax: .to( object containing chosen parameter's ending values, time of tween in ms, type of easing to use, "true" value, [optional] onComplete event handler)
+        //     var scaleTween = game.add.tween(token.scale);
+        //     var timeToTween = 10000;
+        //     scaleTween.to({
+        //         x: 1,
+        //         y: 1
+        //     }, timeToTween, Phaser.Easing.Exponential.In, true);
+        //     // applies to tokens that start on left of screen
 
-            // add tween for tokens to move to edges of screen as they get bigger, helps create illusion of perspective
-            var positionTween = game.add.tween(token.position);
-            // tokens move to random x coordinates of screen
-            positionTween.to({
-                x: Math.random() * game.scrollableWidth,
-                y: game.height * 1.5
-            }, timeToTween, Phaser.Easing.Exponential.In, true)
-            positionTween.onComplete.add(function() {
-                // game.collectedTokens--;
-                token.kill();
-                // console.log("token killed, collectedTokens is", game.collectedTokens)
+        //     // add tween for tokens to move to edges of screen as they get bigger, helps create illusion of perspective
+        //     var positionTween = game.add.tween(token.position);
+        //     // tokens move to random x coordinates of screen
+        //     positionTween.to({
+        //         x: Math.random() * game.scrollableWidth,
+        //         y: game.height * 1.5
+        //     }, timeToTween, Phaser.Easing.Exponential.In, true)
+        //     positionTween.onComplete.add(function() {
+        //         // game.collectedTokens--;
+        //         token.kill();
+        //         // console.log("token killed, collectedTokens is", game.collectedTokens)
 
-            });
-        };
+        //     });
+        // };
 
-        // dropTimerForToken and addTokenTimer are used to generate tokens at random intervals
-        game.addTokenTimer = function() {
-        game.dropTimerForToken = game.time.create(false);
-        game.dropTimerForToken.start();
-            game.addTokenToCollect();
-            // after adding a token, call the addTokenTimer function again after a random amount of time elapses
-            game.dropTimer.add(Phaser.Timer.SECOND * Math.random() * 5, game.addTokenTimer, this);
-        }
-        game.addTokenTimer();
-        //=======================================================
+        // // dropTimerForToken and addTokenTimer are used to generate tokens at random intervals
+        // game.addTokenTimer = function() {
+        // game.dropTimerForToken = game.time.create(false);
+        // game.dropTimerForToken.start();
+        //     game.addTokenToCollect();
+        //     // after adding a token, call the addTokenTimer function again after a random amount of time elapses
+        //     game.dropTimer.add(Phaser.Timer.SECOND * Math.random() * 5, game.addTokenTimer, this);
+        // }
+        // game.addTokenTimer();
+        // //=======================================================
 
 
 
-        // add lives for player to collect
-        //=======================================================
-        //  Create a life inside of the 'livesToCollect' group
-        game.addLifeToCollect = function() {
-            var life = game.livesToCollect.create(game.camera.view.randomX, game.height / 2, 'life');
-            life.scale.setTo(0);
-            life.anchor.setTo(.5);
-            life.enableBody = true;
-            life.body.setSize(50, 300);
+        // // add lives for player to collect
+        // //=======================================================
+        // //  Create a life inside of the 'livesToCollect' group
+        // game.addLifeToCollect = function() {
+        //     var life = game.livesToCollect.create(game.camera.view.randomX, game.height / 2, 'life');
+        //     life.scale.setTo(0);
+        //     life.anchor.setTo(.5);
+        //     life.enableBody = true;
+        //     life.body.setSize(50, 300);
 
-            // tween syntax: .to( object containing chosen parameter's ending values, time of tween in ms, type of easing to use, "true" value, [optional] onComplete event handler)
-            var scaleTween = game.add.tween(life.scale);
-            var timeToTween = 12000;
-            scaleTween.to({
-                x: 1,
-                y: 1
-            }, timeToTween, Phaser.Easing.Exponential.In, true);
+        //     // tween syntax: .to( object containing chosen parameter's ending values, time of tween in ms, type of easing to use, "true" value, [optional] onComplete event handler)
+        //     var scaleTween = game.add.tween(life.scale);
+        //     var timeToTween = 12000;
+        //     scaleTween.to({
+        //         x: 1,
+        //         y: 1
+        //     }, timeToTween, Phaser.Easing.Exponential.In, true);
 
-            var positionTween = game.add.tween(life.position);
-            // lives move to random x coordinates of screen
-            positionTween.to({
-                x: Math.random() * game.scrollableWidth,
-                y: game.height * 1.5
-            }, timeToTween, Phaser.Easing.Exponential.In, true)
-            positionTween.onComplete.add(function() {
-                life.kill();
-            });
-        }
+        //     var positionTween = game.add.tween(life.position);
+        //     // lives move to random x coordinates of screen
+        //     positionTween.to({
+        //         x: Math.random() * game.scrollableWidth,
+        //         y: game.height * 1.5
+        //     }, timeToTween, Phaser.Easing.Exponential.In, true)
+        //     positionTween.onComplete.add(function() {
+        //         life.kill();
+        //     });
+        // }
 
-        // dropTimer and addLifeTimer are used to generate lives at random intervals
-        game.addLifeTimer = function() {
-        game.dropTimerForLives = game.time.create(false);
-        game.dropTimerForLives.start();
-            game.addLifeToCollect();
-            game.dropTimer.add(Phaser.Timer.SECOND * Math.random() / nextLevel * 20, game.addLifeTimer, this);
-        }
-        game.addLifeTimer();
-        //=======================================================
+        // // dropTimer and addLifeTimer are used to generate lives at random intervals
+        // game.addLifeTimer = function() {
+        // game.dropTimerForLives = game.time.create(false);
+        // game.dropTimerForLives.start();
+        //     game.addLifeToCollect();
+        //     game.dropTimer.add(Phaser.Timer.SECOND * Math.random() / nextLevel * 20, game.addLifeTimer, this);
+        // }
+        // game.addLifeTimer();
+        // //=======================================================
 
 
 
