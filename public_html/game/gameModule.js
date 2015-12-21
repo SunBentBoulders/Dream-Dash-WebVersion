@@ -9,12 +9,12 @@ angular.module('dreamDash.game', [
         console.log("inside GameController");
 
     }])
-    // this is the directive to run the game
-    // best practice to add custom prefix to directives to avoid future collisions
+    /* this is the directive to run the game
+     best practice to add custom prefix to directives to avoid future collisions*/
     .directive('myGamecanvas', ['$injector', function($injector) {
         console.log("inside myGamecanvas directive");
-        // when directive is attached to page, its link function will get called
-        // add a link function that creates an isolated scope
+        /* when directive is attached to page, its link function will get called
+         add a link function that creates an isolated scope*/
         var linkFunction = function(scope, element, attributes) {
             createGame(scope, scope.mapId, $injector);
         };
@@ -23,8 +23,8 @@ angular.module('dreamDash.game', [
                 // not sure if mapId is actually needed yet
                 mapId: '='
             },
-            // template: '<div id="game"></div> <div id="orientation"></div>',
-            // templateUrl: 'game/mainGame.html',
+            /* template: '<div id="game"></div> <div id="orientation"></div>',
+             templateUrl: 'game/mainGame.html',*/
             link: linkFunction
         }
     }])
