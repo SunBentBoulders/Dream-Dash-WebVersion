@@ -80,7 +80,7 @@ LevelUp.prototype = {
 
     create: function(game) {
         this.stage.backgroundColor = 0x4B0082
-        
+
         if (game.device.desktop) {
             this.titleText = game.add.text(game.width / 2, game.height / 4, "You Woke Up!", {
                 font: 'bold ' + game.width / 13.33 + 'pt TheMinion',
@@ -133,6 +133,8 @@ LevelUp.prototype = {
         //makes clocks pop out on LevelUp state
         emitter = game.add.emitter(game.world.centerX, 200, 200);
         emitter.makeParticles('clock');
+        emitter.maxParticleScale = 0.5;
+        emitter.minParticleScale = 0.5;
         emitter.start(true, 4000, null, totalScore);
         game.time.events.add(4000, this.destroyEmitter, this);
 
