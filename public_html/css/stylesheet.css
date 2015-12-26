@@ -3,6 +3,17 @@ body {
     background: #000;
      /* makes space for header above body */
     margin-top: 80px;
+    color: rgb(157,156,154);
+    font-family: sans-serif;
+}
+
+h1, h2, h3, h4 {
+    color: mintcream;
+}
+
+.footer {
+    background-color: #000;
+    text-align: center;
 }
 
 /* style for logo in nav bar */
@@ -32,12 +43,13 @@ body {
  }*/
 
  #aboutGame {
-    color: white;
+    color: mintcream;
 }
 
 div#aboutGame {
     margin-left: 120px;
     margin-right: 120px;
+    color: mintcream;
 }
 
 

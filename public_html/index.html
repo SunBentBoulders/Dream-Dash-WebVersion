@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     
-    <!-- our custom and minified CSS styles -->
-    <link rel="stylesheet" type="text/css" href="minified/style.min.css">
+    <!-- minified CSS styles -->
     <link rel="stylesheet" type="text/css" href="minified/stylesheet.min.css" </head>
 
     <body class="container-fluid" ng-app="dreamDash">
@@ -74,8 +73,19 @@
     -->
     <script>
         console.log("end of scripts loading in gameView.html")
+        if(window.console){
+            console.log("Wanna' roll with us? Check out - http://sunbentboulders.com/careers/");
+        }
     </script>
-
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">&copy; <a href="https://github.com/sunbentboulders/Dream-Dash-WebVersion" target="_blank">Sun Bent Boulders</a>, 2015-2016.</p>
+            <a href=" http://tinyurl.com/dreamdash-android"><img align="left" src="./assets/images/GooglePlay_logo.png"></a>
+        <a href="http://tinyurl.com/dreamdash-ios"><img align="right" src="./assets/images/AppStore_Logo.png"></a>
+        </div>
+    </footer>
+    
     </body>
 
 </html>
