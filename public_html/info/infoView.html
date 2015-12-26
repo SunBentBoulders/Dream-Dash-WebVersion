@@ -3,24 +3,21 @@
 	<h1>Development Team</h2>
     <div class="container">
         <div ng-repeat="developer in data.developerInfo" class="row col-md-4 eachDeveloper">
-            <h3>{{developer.name}}</h3>
+            <h3>{{developer.fullname}}</h3>
 
-            <img ng-src="{{developer.pictureSrc}}"></img>
+            <img align="center" class="img-circle" width="100%" height="100%" ng-src="{{developer.pictureSrc}}"></img>
 
-<!--            <h4>Bio</h4>-->
+            <!-- <h4>Bio</h4>-->
                 <p>{{developer.bio}}</p>
-            <h4>Github: </h4>
-                <p><a href="https://github.com/{{developer.github}}">{{developer.github}}</a></p>
-
-            <h4>Email: </h4>
-                <p><a href="mailto: {{developer.email}}">{{developer.email}}</a></p>
-
-            <h4>Linkedin: </h4>
-                <p><a href="https://www.linkedin.com/in/{{developer.linkedin}}">www.linkedin.com/in/{{developer.linkedin}}</a><p>
-
-            <h4>Blog: </h4>
-                <p><a href="{{developer.blog}}">{{developer.blog}}</a></p>
-
+            <!-- Developer Contact Info -->
+            <!-- <h4>Github: </h4>-->
+                <p align="center"><a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub32px.png" class="img-circle" align="left" width="32" height="32"></a>
+            <!-- <h4>Linkedin: </h4>-->
+                <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedIn41px.png" class="img-square" align="center" width="40" height="32"></a>
+            <!-- <h4>Email: </h4>-->
+                <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="img-circle" align="right" width="40" height="40"></a>
+            <br>
+            <h4 align="left"><a href="{{developer.blog}}">{{developer.firstname}}'s Blog</a></h4></p>
         </div>
     </div>
 

@@ -23,7 +23,7 @@ a {
 /* style for logo in nav bar */
 .dreamDashLogo {
     max-height: 50px;
-
+}
 
 #orientation {
     margin: 0 auto;
@@ -55,8 +55,3 @@ div#aboutGame {
     margin-right: 120px;
     color: mintcream;
 }
-
-
-#aboutGame img {
-
-
