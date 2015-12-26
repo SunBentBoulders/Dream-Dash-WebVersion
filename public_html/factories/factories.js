@@ -17,8 +17,8 @@ angular.module('dreamDash.factories', [])
 			"github": "existenzial",
 			"email": "ripley36706@gmail.com",
 			"linkedin": "jazzlyles",
-			"blog": "http://www.jazzedaboutcoding.wordpress.com",
-			"bio": "Avid tinkerer, photography nerd and a lover of all things creative, Jazz draws passion for innovation from the natural beauty of the world and staying active in social justice reform. A believer in bridging the diversity gap in tech and helping those voices get heard drives their belief that the world is a work in progress, but it's doubly important that we make games and have fun along the way."
+			"blog": "http://jazzedaboutcoding.wordpress.com",
+			"bio": "Avid tinkerer, photography nerd and a lover of all things creative, Jazz draws passion for innovation from the natural beauty of the world and staying active in social justice reform. A believer in bridging the diversity gap in tech and helping those voices get heard drives their belief that the world is a work in progress, but it's doubly important that we make sure we have fun along the way to progress."
 		},
 		"dev3": {
 			"name": "Darryl Nunn",
