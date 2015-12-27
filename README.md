@@ -28,7 +28,7 @@ Options for playing Dream Dash include:
 2. [![Google Play](/public_html/assets/images/GooglePlay_logo.png)](https://play.google.com/store/apps/details?id=com.sunbentboulders.dreamdash)
 3. Play online [here](http://dreamdash.herokuapp.com)
 
-4. ```javascriptClone this repo to your local machine and run through localhost```
+4. ```Clone this repo to your local machine and run through localhost```
 
 ## Requirements
 
