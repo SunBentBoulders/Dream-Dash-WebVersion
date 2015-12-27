@@ -3,6 +3,7 @@ body {
     background: #000;
      /* makes space for header above body */
     margin-top: 80px;
+    padding: 20px 20px 20px 20px;
     color: rgb(157,156,154);
     font-family: sans-serif;
 }
@@ -11,8 +12,17 @@ h1, h2, h3, h4 {
     color: mintcream;
 }
 
+p {
+    padding: 15px 15px 15px 15px;
+}
+
 a {
     color: rgb(81,81,81);
+}
+
+.contact {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .footer {
