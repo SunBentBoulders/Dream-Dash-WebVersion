@@ -36,8 +36,9 @@ var Game = function(game) {
     var pause;
     var pausedText;
     var totalScore;
+    thisLevel = 0;
     // tracks current level that the player is on
-    this.currentLevel = 1;
+    this.currentLevel = 0;
     game.currentLevel = this.currentLevel;
     nextLevel = 1;
     //sets player invincibility when hit by an enemy
@@ -67,6 +68,10 @@ Game.prototype = {
 
 
     create: function(game) {
+        // increase the level
+        thisLevel++;
+        this.currentLevel++;
+        console.log("this.currentLevel in create", this.currentLevel)
         //adds in transitions
         transitionPlugin = game.plugins.add(Phaser.Plugin.StateTransition);
         transitionPlugin.settings = {
@@ -191,7 +196,8 @@ Game.prototype = {
         };
         // parameters: className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval
         // add enemies to game
-        game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, 1 / game.currentLevel * 3.5);
+        game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, 1 / this.currentLevel * 3.5);
+        console.log("this.currentLevel", this.currentLevel)
         // add tokens to game for player to collect (clocks)
         game.startSpriteTimer(game.tokensToCollect, 'token', 30, 30, 10000, 5);
         // add lives to game (candles)
@@ -407,6 +413,7 @@ Game.prototype = {
         //increases the level
         nextLevel++;
         // console.log('this is currentLevel', nextLevel);
+        thisLevel = this.currentLevel;
 
         //starts the LevelUp state
         transitionPlugin.to("LevelUp");
