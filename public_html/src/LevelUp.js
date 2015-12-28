@@ -93,7 +93,7 @@ LevelUp.prototype = {
             optionCount = 1;
             // user's level
             //========================================
-            this.showLevel = game.add.text(game.width / 2, game.height / 4 + game.height / 8, 'You completed level ' + thisLevel, {
+            this.showLevel = game.add.text(game.width / 2, game.height / 4 + game.height / 8, 'Level ' + thisLevel + ' complete', {
                 font: 'bold ' + game.width / 40 + 'pt TheMinion',
                 fill: '#c37c01',
                 align: 'center'
