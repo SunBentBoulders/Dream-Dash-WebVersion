@@ -1,49 +1,38 @@
 <div id="info">
-    <div class="row featurette">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 align="center">Sun Bent Boulders</h1>
+            <div class="col-md-5">
+                <img align="center" class="featurette-image img-responsive center-block" src="./assets/images/Boulder.png" alt="The Team">
+            </div>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    
+    <div class="row featurette info-header" align = "center">
         <div class="col-md-7">
             <h2 class="featurette-heading">Sun Bent Boulders  <span class="text-muted">|  Development Team</span></h2>
-            <p class="lead"><code><em>"Just try it..."</em></code></p>
-        </div>
-        <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" src="./assets/images/Boulder.png" alt="The Team">
         </div>
     </div>
-    <hr class="featurette-divider">
-      
-    <!-- LAYOUT #1 -->
+    <br>
+    <br>
+    <!-- Developer Info -->
     <div class="row col-lg-4" ng-repeat="developer in data.developerInfo">
+        <br>
         <img class="img-square" ng-src="{{developer.pictureSrc}}" alt="Generic placeholder image" width="20%" height="20%">
         <h2>{{developer.fullname}}</h2>
-        <h4 align="left"><a href="{{developer.blog}}"><em>{{developer.firstname}}'s Blog</em></a></h4>
+        <h4 class="blog" align="left"><a href="{{developer.blog}}"><em>{{developer.firstname}}'s Blog</em></a></h4>
         <p>{{developer.bio}}</p>
-        <p align="left">
+        <!-- Developer Contact Icons -->
+        <p class="contact-icon">
             <!-- Github: -->
-            <a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub32px.png" class="contact img-square img-responsive" align="left" width="32" height="32"></a>
-            <!-- Linkedin: -->
-            <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedIn41px.png" class="contact img-square img-responsive" align="left" width="40" height="32"></a>
+            <a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub32px.png" class="contact img-square img-responsive" align="left" width="40" height="40"></a>
+            <!-- LinkedIn: -->
+            <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedIn41px.png" class="contact img-square img-responsive" align="left" width="48" height="40"></a>
             <!-- Email: -->
-            <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="contact img-square img-responsive" align="left" width="40" height="32"></a>
+            <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="contact img-square img-responsive" align="left" width="48" height="48"></a>
+            <br>
+        <hr class="featurette-divider">
         </p>
-        <br>
     </div>
-
-    <!-- LAYOUT #2 -->
-    <hr class="featurette-divider">
-    <div class="container">
-        <div ng-repeat="developer in data.developerInfo" class="row col-md-4 eachDeveloper">
-            <!-- Developer Info -->
-            <h3>{{developer.fullname}}</h3>
-            <h4 align="left"><a href="{{developer.blog}}"><em>{{developer.firstname}}'s Blog</em></a></h4>
-            <img align="center" class="img-square" width="20%" height="20%" ng-src="{{developer.pictureSrc}}"></img>
-            <!-- Bio -->
-            <p>{{developer.bio}}</p>
-            <p align="center">
-                <!-- Github: -->
-                <a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub32px.png" class="img-square img-responsive" align="left" width="32" height="32"></a>
-                <!-- <h4>Linkedin: </h4>-->
-                <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedIn41px.png" class="img-square" align="center" width="40" height="32"></a>
-                <!-- Email: -->
-                <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="img-square img-responsive" align="right" width="40" height="40"></a>
-            </p>
-        </div>
-    </div>
+</div>
