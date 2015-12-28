@@ -7,18 +7,19 @@
             </div>
         </div>
     </div>
-    <hr class="featurette-divider">
     
-    <div class="row featurette info-header" align = "center">
+    <hr class="featurette-divider">
+    <div class="row featurette info-header" align="center">
         <div class="col-md-7">
-            <h2 class="featurette-heading">Sun Bent Boulders  <span class="text-muted">|  Development Team</span></h2>
+            <h2 class="featurette-heading">Development Team</h2>
         </div>
     </div>
+    <hr class="featurette-divider">
     <br>
     <br>
+    
     <!-- Developer Info -->
     <div class="row col-lg-4" ng-repeat="developer in data.developerInfo">
-        <br>
         <img class="img-square" ng-src="{{developer.pictureSrc}}" alt="Generic placeholder image" width="20%" height="20%">
         <h2>{{developer.fullname}}</h2>
         <h4 class="blog" align="left"><a href="{{developer.blog}}"><em>{{developer.firstname}}'s Blog</em></a></h4>
@@ -26,13 +27,13 @@
         <!-- Developer Contact Icons -->
         <p class="contact-icon">
             <!-- Github: -->
-            <a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub32px.png" class="contact img-square img-responsive" align="left" width="40" height="40"></a>
+            <a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub32px.png" class="contact img-square img-responsive" align="left" width="60" height="60"></a>
             <!-- LinkedIn: -->
-            <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedIn41px.png" class="contact img-square img-responsive" align="left" width="48" height="40"></a>
+            <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedIn41px.png" class="contact img-square img-responsive" align="left" width="68" height="60"></a>
             <!-- Email: -->
-            <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="contact img-square img-responsive" align="left" width="48" height="48"></a>
+            <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="contact img-square img-responsive" align="left" width="80" height="80"></a>
             <br>
-        <hr class="featurette-divider">
+            <p><hr class="featurette-divider"></p>
         </p>
     </div>
 </div>
