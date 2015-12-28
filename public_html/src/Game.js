@@ -354,7 +354,6 @@ Game.prototype = {
         // console.log('game.score', game.score);
         //Upper right corner display of left to collect
         this.leftToCollect.text = ' x ' + this.tokensToCollect;
-        this.leftToCollect.cssFont = 'bold 50pt Arial';
     },
 
     // this function is called when the player collides with an enemy
