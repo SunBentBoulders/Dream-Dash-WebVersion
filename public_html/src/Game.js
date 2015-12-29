@@ -168,23 +168,23 @@ Game.prototype = {
             className.enableBody = true;
             sprite.body.setSize(bodySizeX, bodySizeY);
 
-            // TODO: make sprites move with physics velocity instead of position tween
-            // game.physics.arcade.moveToXY(spriteName, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
-
+            // add velocity to sprites so that collisions still register when player is standing still
+            game.physics.arcade.accelerateToXY(sprite, Math.random() * game.scrollableWidth, this.height * 1.5, 20, timeToTween)
 
             // add a tween that scales the sprite sizes
             var scaleTween = game.add.tween(sprite.scale);
             // scales sprite from size 0 to full size
             scaleTween.to({ x: 1, y: 1}, timeToTween, Phaser.Easing.Exponential.In, true);
+             // this function gets called once tween is complete - will kill sprites once tween is complete and they are off screen
+            scaleTween.onComplete.add(function() {
+                sprite.kill();
+            });
 
             // add a tween that changes the position of the sprite
             var positionTween = game.add.tween(sprite.position);
             // sprites move to random x coordinates of screen
             positionTween.to({ x: Math.random() * game.scrollableWidth, y: this.height * 1.5}, timeToTween, Phaser.Easing.Exponential.In, true);
-            // this function gets called once tween is complete - will kill sprites once tween is complete and they are off screen
-            positionTween.onComplete.add(function() {
-                sprite.kill();
-            });
+
         };
 
         // this function adds sprites based on a set interval of time
@@ -392,19 +392,19 @@ Game.prototype = {
         this.loseLife();
     },
 
-     // this function for debugging only
-     render: function(game) {
-       // this.game.debug.bodyInfo(this.player, 32, 32);
-       this.game.debug.body(this.player);
-       this.game.enemies.forEachAlive(this.renderGroup, this);
-       this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
-       this.game.livesToCollect.forEachAlive(this.renderGroup, this);
-     },
+     // // this function for debugging only
+     // render: function(game) {
+     //   // this.game.debug.bodyInfo(this.player, 32, 32);
+     //   this.game.debug.body(this.player);
+     //   this.game.enemies.forEachAlive(this.renderGroup, this);
+     //   this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
+     //   this.game.livesToCollect.forEachAlive(this.renderGroup, this);
+     // },
 
-     // this function for debugging groups of sprites only
-     renderGroup: function(member) {
-       this.game.debug.body(member);
-     },
+     // // this function for debugging groups of sprites only
+     // renderGroup: function(member) {
+     //   this.game.debug.body(member);
+     // },
 
     collectLife: function(player, life) {
         life.kill();
