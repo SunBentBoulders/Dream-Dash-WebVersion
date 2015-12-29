@@ -74,7 +74,6 @@ Game.prototype = {
         // increase the level
         thisLevel++;
         this.currentLevel++;
-        console.log("this.currentLevel in create", this.currentLevel)
         //adds in transitions
         transitionPlugin = game.plugins.add(Phaser.Plugin.StateTransition);
         transitionPlugin.settings = {
@@ -200,7 +199,6 @@ Game.prototype = {
         // parameters: className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval
         // add enemies to game
         game.startSpriteTimer(game.enemies, 'enemy', 150, 250, 9000, 1 / this.currentLevel * 3.5);
-        console.log("this.currentLevel", this.currentLevel)
         // add tokens to game for player to collect (clocks)
         game.startSpriteTimer(game.tokensToCollect, 'token', 30, 30, 10000, 5);
         // add lives to game (candles)
@@ -295,7 +293,6 @@ Game.prototype = {
         // Checks to see if the player overlaps with any of the enemies, if he does, call the checkCollision function.
         // 3rd parameter is collision logic; 4th parameter allows collision to happen if returns true
         game.physics.arcade.collide(this.player, game.enemies, this.checkCollision, function() {
-            console.log("playerInvincible", playerInvincible);
             return !playerInvincible;
         }, this);
         //=====================================================
