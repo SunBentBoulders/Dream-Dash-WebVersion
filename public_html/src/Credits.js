@@ -133,6 +133,7 @@ Credits.prototype = {
         var bg = this.game.add.sprite(0, 0, 'gameover-bg');
 
         if (this.game.device.desktop) {
+            this.addCredit('Credits');
             this.addCredit('Physics Engineer', 'Shanna Sullivan');
             this.addCredit('State Engineer', 'Jazz Lyles');
             this.addCredit('Mechanics Engineer', 'Darryl Nunn');
