@@ -1,7 +1,6 @@
 angular.module('dreamDash.info', [
     // add dependencies here
     'dreamDash.factories'
-
 ])
 
 // if there are factory dependencies, add function it depends on as a function argument

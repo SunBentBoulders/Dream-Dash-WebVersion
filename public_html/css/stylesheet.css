@@ -3,12 +3,63 @@ body {
     background: #000;
      /* makes space for header above body */
     margin-top: 80px;
+    padding: 20px 20px 20px 20px;
+    color: rgb(157,156,154);
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.jumbotron {
+    max-width: 100%;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+h1, h2, h3, h4 {
+    color: mintcream;
+}
+
+.navbar-brand {
+    font-size: 30px;
+}
+
+p {
+    padding: 15px 15px 15px 15px;
+}
+
+div {
+    padding: 10px 10px 10px 10px;
+    display: block;
+}
+
+.blog {
+    padding: 10px 10px 10px 10px;
+    max-width: 95%;
+    background-color: #fff;
+    font-size: 22px;
+}
+
+a {
+    color: rgb(81,81,81);
+}
+
+.contact {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.footer {
+    background-color: #000;
+    text-align: center;
 }
 
 /* style for logo in nav bar */
 .dreamDashLogo {
     max-height: 50px;
-
+}
 
 #orientation {
     margin: 0 auto;
@@ -32,15 +83,11 @@ body {
  }*/
 
  #aboutGame {
-    color: white;
+    color: mintcream;
 }
 
 div#aboutGame {
     margin-left: 120px;
     margin-right: 120px;
+    color: mintcream;
 }
-
-
-#aboutGame img {
-
-

@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <title>Dream Dash</title>
 
-    <!-- Latest compiled and minified CSS -->
+    <!-- CDN Bootstrap Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- our custom styles -->
-    <link rel="stylesheet" type="text/css" href="minified/style.min.css">
-    <link rel="stylesheet" type="text/css" href="minified/stylesheet.min.css" </head>
+    
+    <!-- minified CSS styles -->
+    <link rel="stylesheet" type="text/css" href="minified/stylesheet.min.css">
+    </head>
 
     <body class="container-fluid" ng-app="dreamDash">
         <!-- fixed navbar -->
@@ -25,12 +25,14 @@
                     <a class="navbar-brand" ui-sref="aboutDreamDash"><b>About Dream Dash</b></a>
                 </ul>
                 <ul class="navbar-right">
-                    <a class="navbar-brand" ui-sref="game"><img class="dreamDashLogo" src="icons/dreamDashLogo4square.png" alt="Dream Dash Logo"></img>
+                    <a class="navbar-brand" ui-sref="game"><img class="dreamDashLogo img-responsive" src="icons/dreamDashLogo4square.png" alt="Dream Dash"></img>
                     </a>
                 </ul>
             </ul>
         </nav>
+    
         <div ui-view></div>
+
         <!-- Angular -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
         <!-- Angular ui router -->
@@ -76,8 +78,29 @@
     
     <script>
         console.log("end of scripts loading in gameView.html")
+        if(window.console){
+            console.log("Wanna' roll with us? Check out - http://sunbentboulders.com/careers/");
+        }
     </script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">&copy; <a href="https://github.com/sunbentboulders/Dream-Dash-WebVersion" target="_blank">Sun Bent Boulders</a>, 2015-2016</p>
+            <a href=" http://tinyurl.com/dreamdash-android"><img class="img-responsive" align="left" width="40%" height="40%" src="./assets/images/GooglePlay_logo.png"></a>
+        <a href="http://tinyurl.com/dreamdash-ios"><img class="img-responsive" align="right" width="40%" height="40%" src="./assets/images/AppStore_Logo.png"></a>
+        </div>
+    </footer>
+    
+        <!-- Angular Script Tags-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+        <!-- jQuery (required by Angular) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <!-- Bootstrap Script -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
+        <!-- All minified scripts -->
+        <script src="minified/allfiles.min.js"></script>
     </body>
 
 </html>

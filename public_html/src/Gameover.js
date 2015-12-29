@@ -3,7 +3,7 @@ var GameOver = function(game) {};
 GameOver.prototype = {
 
     preload: function(game) {
-        //loads up buttons for game over screen, smaller buttons for 960x640
+        //loads up buttons for GameOver state &  smaller buttons for 960x640
         if (window.deviceAssetSize === '960x640') {
             game.load.image('Main Menu', 'assets/buttons/mainMenuButton40pt.png');
             game.load.image('Play Again', 'assets/buttons/playAgainButton40pt.png');
@@ -73,7 +73,6 @@ GameOver.prototype = {
             text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
             text.anchor.set(0.5);
             this.addDesktopMenuOption('Play Again', function(e) {
-                // need to add game state rather than start game state
                 game.state.add('game', Game, true);
             });
             this.addDesktopMenuOption('Main Menu', function(e) {

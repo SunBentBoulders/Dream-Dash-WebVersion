@@ -20,8 +20,10 @@ MainMenu.prototype = {
     init: function(game) {
         
         if (this.game.device.desktop) {
-            // this.game.add.sprite(this.game.world.centerX, this.game.height/6, 'Start')
-            // optionCount = 1;
+            /* 
+            this.game.add.sprite(this.game.world.centerX, this.game.height/6, 'Start')
+             optionCount = 1;
+            */
 
             this.titleText = this.game.make.text(this.game.world.centerX, this.game.height / 6, "Dream Dash", {
                 font: 'bold ' + this.game.width / 13.33 + 'pt TheMinion',
