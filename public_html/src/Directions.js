@@ -8,7 +8,7 @@ Directions.prototype = {
     
     preload: function(game){
         
-        game.load.image('directions-bg', 'assets/images/mobile_directions.png');
+        game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
         game.load.image('clock_candle', 'img/clock_candle_combo.png');
     },
     
