@@ -62,9 +62,8 @@ window.createGame = function(scope, mapId, injector) {
     }
 
     /*  Add the Game States */
-    game.state.add('Boot', Boot); //main.js
-    game.state.add('Preloader', Preloader);
-    // game.state.add('Game', Game); //src/Game.js
+    game.state.add('Directions', Directions);
+    game.state.add('Boot', Boot);
 
     //  Now start the Boot state.
     game.state.start('Boot');
