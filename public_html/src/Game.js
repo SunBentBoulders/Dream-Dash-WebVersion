@@ -171,6 +171,7 @@ Game.prototype = {
             // TODO: make sprites move with physics velocity instead of position tween
             // game.physics.arcade.moveToXY(spriteName, Math.random() * game.scrollableWidth, this.height * 1.5, 200, 14000)
 
+
             // add a tween that scales the sprite sizes
             var scaleTween = game.add.tween(sprite.scale);
             // scales sprite from size 0 to full size
@@ -285,16 +286,17 @@ Game.prototype = {
 
         // collisions/collections===============================
         //Check to see if tokensTocollect is collected if so, run collectToken
-        game.physics.arcade.overlap(this.player, game.tokensToCollect, null, this.collectToken, this);
+        game.physics.arcade.overlap(this.player, game.tokensToCollect, this.collectToken, null, this);
 
         //check to see if livesToCollect is collected, if so, run collectLife
-        game.physics.arcade.overlap(this.player, game.livesToCollect, null, this.collectLife, this);
+        game.physics.arcade.overlap(this.player, game.livesToCollect, this.collectLife, null, this);
 
         // Checks to see if the player overlaps with any of the enemies, if he does, call the checkCollision function.
         // 3rd parameter is collision logic; 4th parameter allows collision to happen if returns true
         game.physics.arcade.collide(this.player, game.enemies, this.checkCollision, function() {
             return !playerInvincible;
         }, this);
+        // game.physics.arcade.collide(this.player, game.enemies, null, this.checkCollision, this);
         //=====================================================
 
         // Reset the players velocity (movement)
