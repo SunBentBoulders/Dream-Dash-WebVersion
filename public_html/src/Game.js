@@ -46,6 +46,9 @@ var Game = function(game) {
     //sets the player's livesLost as false to start
     playerLostLife = false;
     this.backgroundImage;
+    // add timer for when player flashes on invincibility. see toggleInvincible function
+    this.flashingTimer = 0;
+
 };
 
 Game.prototype = {
@@ -289,8 +292,12 @@ Game.prototype = {
         //check to see if livesToCollect is collected, if so, run collectLife
         game.physics.arcade.overlap(this.player, game.livesToCollect, null, this.collectLife, this);
 
-        // Checks to see if the player overlaps with any of the enemies, if he does call the checkCollision function, then gameOver function
-        game.physics.arcade.collide(this.player, game.enemies, null, this.checkCollision, this);
+        // Checks to see if the player overlaps with any of the enemies, if he does, call the checkCollision function.
+        // 3rd parameter is collision logic; 4th parameter allows collision to happen if returns true
+        game.physics.arcade.collide(this.player, game.enemies, this.checkCollision, function() {
+            console.log("playerInvincible", playerInvincible);
+            return !playerInvincible;
+        }, this);
         //=====================================================
 
         // Reset the players velocity (movement)
@@ -339,6 +346,18 @@ Game.prototype = {
         }
         //==================================================
 
+        // make player flash for 3 seconds (while invincible)
+        //===================================================
+        if (playerInvincible) {
+            // make timer count to x amount of time, then reset to 0 and toggle the player visibility
+            this.flashingTimer += this.time.elapsed;
+            if (this.flashingTimer >= 80) {
+                this.flashingTimer -= 80;
+                this.player.visible = !this.player.visible;
+            }
+        }
+        //===================================================
+
         //this is here to simulate winning the game, need to go to game.state(win) once set up
         if (this.tokensToCollect + this.collectedTokens === this.collectedTokens) {
             //calls function to increase the level
@@ -374,19 +393,19 @@ Game.prototype = {
         this.loseLife();
     },
 
-   /*  // this function for debugging only
+     // this function for debugging only
      render: function(game) {
        // this.game.debug.bodyInfo(this.player, 32, 32);
        this.game.debug.body(this.player);
        this.game.enemies.forEachAlive(this.renderGroup, this);
        this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
        this.game.livesToCollect.forEachAlive(this.renderGroup, this);
-     },*/
+     },
 
-    /* // this function for debugging groups of sprites only
+     // this function for debugging groups of sprites only
      renderGroup: function(member) {
        this.game.debug.body(member);
-     },*/
+     },
 
     collectLife: function(player, life) {
         life.kill();
@@ -423,24 +442,21 @@ Game.prototype = {
 
     loseLife: function() {
         if (!playerInvincible) {
+            //makes the player invincible
+            this.toggleInvincible();
+            //makes device vibrate
+            window.navigator.vibrate([1000]);
+            //makes the player non-invincible after 3 seconds
+            this.game.time.events.add(3000, this.toggleInvincible, this);
             if (this.life3.visible) {
                 // set new alpha for sprites
                 var newAlpha = 0.8;
                 //makes the third life dissappear
                 this.life3.visible = false;
-                //makes the player non-invincible
-                this.toggleInvincible();
-                //makes device vibrate
-                window.navigator.vibrate([1000]);
-                //makes the player invincible for 5 seconds
-                this.game.time.events.add(3000, this.toggleInvincible, this);
             } else if (this.life2.visible) {
                 var newAlpha = 0.6;
                 //makes 2nd life disappear
                 this.life2.visible = false;
-                this.toggleInvincible();
-                window.navigator.vibrate([1000]);
-                this.game.time.events.add(5000, this.toggleInvincible, this);
             } else {
                 //Ends the game once player loses last life
                 this.gameOver();
@@ -477,8 +493,10 @@ Game.prototype = {
 
     },
 
-    toggleInvincible: function() {
+    toggleInvincible: function(game) {
         playerInvincible = !playerInvincible;
+        // make sure player is visible when invincibility ends
+        this.player.visible = true;
     },
 
     toggleLostLife: function() {
