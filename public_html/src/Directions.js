@@ -49,9 +49,9 @@ Directions.prototype = {
     
         
         game.state.add('Preloader', Preloader);
-/*        setTimeout(function() {
+        setTimeout(function() {
             game.state.start('Preloader');
-        }, 6000);   */   
+        }, 6000);      
     }
     
 };
