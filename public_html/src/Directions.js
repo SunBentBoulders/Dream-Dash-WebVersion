@@ -11,15 +11,15 @@ Directions.prototype = {
         if (window.deviceAssetSize === 'desktop') {
             game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
         } else if (window.deviceAssetSize === '1024x768') {
-            game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
         } else if (window.deviceAssetSize === '960x640') {
-            game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
         } else if (window.deviceAssetSize === '1280x800') {
-            game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
         } else if (window.deviceAssetSize === '1024x600') {
-            game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
         } else if (window.deviceAssetSize === '1408x792') {
-            game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
         }
         
         game.load.image('clock_candle', 'img/clock_candle_combo.png');
