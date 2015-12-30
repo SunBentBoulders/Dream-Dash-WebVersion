@@ -7,6 +7,7 @@ var text, text2, titleText;
 Directions.prototype = {
     
     preload: function(game){
+        this.optionCount = 1;
         
         if (window.deviceAssetSize === 'desktop') {
             game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
@@ -25,18 +26,61 @@ Directions.prototype = {
         game.load.image('clock_candle', 'img/clock_candle_combo.png');
     },
     
+    addDesktopMenuOption: function(text, callback) {
+        
+        var optionStyle = {
+            font: this.game.height / 20 + 'pt TheMinion',
+            fill: '#f0daac',
+            align: 'left',
+            stroke: 'rgba(0,0,0,0)',
+            strokeThickness: 4
+        };
+        
+        var txt = this.game.add.text(this.game.width / 30, ((this.optionCount + 2) * this.game.height / 7.5) + this.game.height / 4, text, optionStyle);
+        txt.setShadow(3, 3, 'rgba(0,0,0,1.5)', 5);
+        txt.stroke = "rgba(0,0,0,0";
+        txt.strokeThickness = 4;
+        var onOver = function(target) {
+            target.fill = "#FEFFD5";
+            target.stroke = "rgba(200,200,200,0.5)";
+            txt.useHandCursor = true;
+            txt.setShadow(3, 3, 'rgba(0,0,0,1.5)', 5);
+        };
+        
+        var onOut = function(target) {
+            target.fill = "#f0daac";
+            target.stroke = "rgba(0,0,0,0)";
+            txt.useHandCursor = false;
+        };
+        
+        txt.inputEnabled = true;
+        txt.events.onInputUp.add(callback, this);
+        txt.events.onInputOver.add(onOver, this);
+        txt.events.onInputOut.add(onOut, this);
+
+        this.optionCount++;
+    },
+
+    addMobileMenuOption: function(buttonName, callback) {
+        var button = this.game.add.button(this.game.width / 30, ((this.optionCount + 1) * this.game.height / 7.5) + this.game.height / 2, buttonName);
+        button.inputEnabled = true;
+        button.events.onInputDown.add(callback, this);
+
+    },
+    
     create: function(game){
+        
+       game.state.add('Preloader', Preloader);
         
         if (this.game.device.desktop) {
 
-            titleText = game.add.text(this.game.width.centerX, this.game.height.centerY/4, "How To Play", {
+            titleText = game.add.text(this.game.width/2, this.game.height.centerY/4, "How To Play", {
                 font: 'bold ' + this.game.height / 20 + 'pt TheMinion',
                 fill: '#7CCD7C',
                 align: 'center'
             });
             titleText.anchor.set(0);
 
-            console.log("In create Directions func");
             game.add.sprite(this.game.width.centerX, this.game.height/6, 'directions-bg');
             game.add.sprite(this.game.width.centerX, this.game.height/8, 'clock_candle');
     
@@ -58,13 +102,15 @@ Directions.prototype = {
             });
             text.anchor.set(0);
 
+            this.addDesktopMenuOption('Continue >', function(e) {
+                    game.state.start("Preloader");
+            });      
+        } else {
+	        this.addMobileMenuOption('Continue >', function() {
+                this.game.state.start("Preloader");
+            })
         }
-    
-        
-        game.state.add('Preloader', Preloader);
-        setTimeout(function() {
-            game.state.start('Preloader');
-        }, 6000);      
+           
     }
     
 };
