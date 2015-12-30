@@ -1,29 +1,39 @@
 <div id="info">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 align="center">Sun Bent Boulders</h1>
+            <div class="col-md-5">
+                <img align="center" class="featurette-image img-responsive center-block" src="./assets/images/Boulder.png" alt="The Team">
+            </div>
+        </div>
+    </div>
     
-	<h1>So who is behind Dream Dash?</h1>
-	<h2>Meet the development team</h2>
+    <hr class="featurette-divider">
+    <div class="row featurette info-header" align="center">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Development Team</h2>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <br>
+    <br>
     
-	<div ng-repeat="developer in data.developerInfo" class="eachDeveloper">
-		<h3>{{developer.name}}</h3>
-
-		<img ng-src="{{developer.pictureSrc}}"></img>
-
-		<h4>Github: </h4>
-			<p><a href="https://github.com/{{developer.github}}">{{developer.github}}</a></p>
-
-		<h4>Email: </h4>
-			<p><a href="mailto: {{developer.email}}">{{developer.email}}</a></p>
-
-		<h4>Linkedin: </h4>
-			<p><a href="https://www.linkedin.com/in/{{developer.linkedin}}">www.linkedin.com/in/{{developer.linkedin}}</a><p>
-
-		<h4>Blog: </h4>
-			<p><a href="{{developer.blog}}">{{developer.blog}}</a></p>
-
-		<h4>Bio</h4>
-			<p>{{developer.bio}}</p>
-	</div>
-
+    <!-- Developer Info -->
+    <div class="row col-lg-4" ng-repeat="developer in data.developerInfo">
+        <img class="img-square" ng-src="{{developer.pictureSrc}}" alt="Generic placeholder image" width="20%" height="20%">
+        <h2>{{developer.fullname}}</h2>
+        <h4 class="blog" align="left"><a href="{{developer.blog}}"><em>{{developer.firstname}}'s Blog</em></a></h4>
+        <p>{{developer.bio}}</p>
+        <!-- Developer Contact Icons -->
+        <p class="contact-icon">
+            <!-- Github: -->
+            <a href="https://github.com/{{developer.github}}"><img src="./assets/images/GitHub64px.png" class="contact img-square img-responsive" align="left" width="60" height="60"></a>
+            <!-- LinkedIn: -->
+            <a href="https://www.linkedin.com/in/{{developer.linkedin}}"><img src="./assets/images/linkedin66px.png" class="contact img-square img-responsive" align="left" width="68" height="60"></a>
+            <!-- Email: -->
+            <a href="mailto: {{developer.email}}"><img src="./assets/images/emaillogo940x940.png" class="contact img-square img-responsive" align="left" width="80" height="80"></a>
+            <br>
+            <p><hr class="featurette-divider"></p>
+        </p>
+    </div>
 </div>
-
-
