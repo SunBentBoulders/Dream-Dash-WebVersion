@@ -256,14 +256,14 @@ Game.prototype = {
 
 
         //Life bar=======================================
-        var lifeDistance = this.game.width / 8
-        this.life1 = game.add.sprite(lifeDistance, this.game.height / 37.5, 'life');
+        this.lifeDistance = this.game.width / 8
+        this.life1 = game.add.sprite(this.lifeDistance, this.game.height / 37.5, 'life');
         this.life1.scale.setTo(.20);
         this.life1.fixedToCamera = true;
-        this.life2 = game.add.sprite(lifeDistance + this.game.width / 20, this.game.height / 37.5, 'life');
+        this.life2 = game.add.sprite(this.lifeDistance + this.game.width / 20, this.game.height / 37.5, 'life');
         this.life2.scale.setTo(.20);
         this.life2.fixedToCamera = true;
-        this.life3 = game.add.sprite(lifeDistance + this.game.width / 10, this.game.height / 37.5, 'life');
+        this.life3 = game.add.sprite(this.lifeDistance + this.game.width / 10, this.game.height / 37.5, 'life');
         this.life3.scale.setTo(.20);
         this.life3.fixedToCamera = true;
 
@@ -429,7 +429,16 @@ Game.prototype = {
      // },
 
     collectLife: function(player, life) {
-        life.kill();
+        // life.kill();
+        // TODO: animate candle going to top of screen
+        var lifePositionTween = this.game.add.tween(life.position);
+        // sprites move to top left of screen
+        lifePositionTween.to({ x: this.lifeDistance, y: this.game.height / 37.5}, 2000, Phaser.Easing.Exponential.Out, true);
+
+        var lifeScaleTween = this.game.add.tween(life.scale);
+            // scales sprite from size 0 to full size
+            lifeScaleTween.to({ x: 1, y: 1}, 2000, Phaser.Easing.Exponential.In, true);
+
         this.gainLife();
     },
 
