@@ -214,7 +214,7 @@ Game.prototype = {
         this.player.animations.add('left', [0, 1, 2, 3, 2, 1], 12, true);
         this.player.animations.add('right', [5, 6, 7, 8, 7, 6], 12, true);
 
-        // Score=============================================
+        // Score - clocks on right of screen=============================================
         // will add this back once level up game state is made
         // this.scoreText = game.add.text(this.realPlayer.x-400, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
         // this.scoreText.fixedToCamera = true;
@@ -235,6 +235,25 @@ Game.prototype = {
         this.scoreSprite.scale.setTo(0.5);
         this.scoreSprite.fixedToCamera = true;
         this.leftToCollect.fixedToCamera = true;
+
+        // Score - current score displays in middle of screen================
+        this.showCurrentScore = game.add.text(game.camera.view.centerX, this.game.height / 12, 'Score: ' + this.score, {
+            fontSize: this.game.height / 17 + 'px',
+            fill: '#fff'
+        });
+        this.showCurrentScore.fixedToCamera = true;
+        this.showCurrentScore.anchor.setTo(0.5, 0.2);
+        //===================================================================
+
+        // show current level in middle of screen============================
+        this.showCurrentLevel = game.add.text(game.camera.view.centerX, this.game.height / 37.5, 'Level ' + this.currentLevel, {
+            fontSize: this.game.height / 17 + 'px',
+            fill: '#fff'
+        });
+        this.showCurrentLevel.fixedToCamera = true;
+        this.showCurrentLevel.anchor.setTo(0.5, 0.3);
+        //===================================================================
+
 
         //Life bar=======================================
         var lifeDistance = this.game.width / 8
@@ -380,6 +399,7 @@ Game.prototype = {
         // console.log('game.score', game.score);
         //Upper right corner display of left to collect
         this.leftToCollect.text = ' x ' + this.tokensToCollect;
+        this.showCurrentScore.text = 'Score: ' + this.score;
     },
 
     // this function is called when the player collides with an enemy
