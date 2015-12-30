@@ -238,7 +238,7 @@ Game.prototype = {
 
         // Score - current score displays in middle of screen================
         this.showCurrentScore = game.add.text(game.camera.view.centerX, this.game.height / 12, 'Score: ' + this.score, {
-            fontSize: this.game.height / 17 + 'px',
+            fontSize: this.game.height / 24 + 'px',
             fill: '#fff'
         });
         this.showCurrentScore.fixedToCamera = true;
