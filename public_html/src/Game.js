@@ -473,16 +473,15 @@ Game.prototype = {
 
     gainLife: function() {
         if (!playerLostLife) {
+            this.toggleLostLife();
+            this.game.time.events.add(3000, this.toggleLostLife, this);
+
             if (!this.life2.visible) {
                 var newAlpha = 0.8;
                 this.life2.visible = true;
-                this.toggleLostLife();
-                this.game.time.events.add(3000, this.toggleLostLife, this);
             } else if (!this.life3.visible) {
                 var newAlpha = 1;
                 this.life3.visible = true;
-                this.toggleLostLife();
-                this.game.time.events.add(5000, this.toggleLostLife, this);
             }
         }
         // set new alphas on sprites
