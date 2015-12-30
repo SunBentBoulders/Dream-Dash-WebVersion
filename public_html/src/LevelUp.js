@@ -83,6 +83,7 @@ LevelUp.prototype = {
         this.stage.backgroundColor = 0x4B0082
 
         if (game.device.desktop) {
+            // title of page
             this.titleText = game.add.text(game.width / 2, game.height / 4, "You Woke Up!", {
                 font: 'bold ' + game.width / 13.33 + 'pt TheMinion',
                 fill: '#7CCD7C',
@@ -91,8 +92,20 @@ LevelUp.prototype = {
             this.titleText.setShadow(3, 3, 'rgba(0,0,0,1.5)', 5);
             this.titleText.anchor.set(0.5);
             optionCount = 1;
+            // user's level
             //========================================
-            this.showScore = game.add.text(game.width / 2, game.height / 4 + game.height / 8, 'Total Score: ' + totalScore, {
+            this.showLevel = game.add.text(game.width / 2, game.height / 4 + game.height / 8, 'Level ' + thisLevel + ' complete', {
+                font: 'bold ' + game.width / 40 + 'pt TheMinion',
+                fill: '#c37c01',
+                align: 'center'
+            });
+            this.showLevel.setShadow(3, 3, 'rgba(0,0,0,1.5)', 5);
+            this.showLevel.anchor.set(0.5);
+            //========================================
+
+            // user's score
+            //========================================
+            this.showScore = game.add.text(game.width / 2, game.height / 4 + (1.5 * game.height / 8), 'Total Score: ' + totalScore, {
                 font: 'bold ' + game.width / 40 + 'pt TheMinion',
                 fill: '#c37c01',
                 align: 'center'

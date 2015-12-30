@@ -1,7 +1,5 @@
 Preloader = function(game) {
-
-    //  this.background = null;
-    //  this.preloadBar = null;
+    
     game.ready = false;
 
 };
@@ -29,7 +27,7 @@ Preloader.prototype = {
 
     preload: function(game) {
         //adds content to splash screen
-        game.add.sprite(0, 0, 'stars');
+        game.add.sprite(0, 0, 'loading-bg');
         game.add.existing(this.game.logo).scale.setTo(0.5);
         game.add.existing(this.game.loadingBar);
         game.add.existing(this.game.status);
