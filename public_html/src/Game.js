@@ -492,6 +492,12 @@ Game.prototype = {
     },
 
     gainLife: function() {
+        // add points to score
+        this.score += 5;
+        totalScore = this.score;
+        // update score shown on screen
+        this.showCurrentScore.text = 'Score: ' + this.score;
+
         if (!playerLostLife) {
             this.toggleLostLife();
             this.game.time.events.add(3000, this.toggleLostLife, this);
