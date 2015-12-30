@@ -71,6 +71,8 @@ Game.prototype = {
 
 
     create: function(game) {
+        //resets the number of tokens to collect
+        this.tokensToCollect = 5;
         // increase the level
         thisLevel++;
         this.currentLevel++;
@@ -415,7 +417,10 @@ Game.prototype = {
         // console.log("gameover");
         // player.kill();
         window.navigator.vibrate([2000]);
+        // reset score and level
         totalScore = 0;
+        this.score = 0;
+        this.currentLevel = 0;
         // reset world bounds to the original 800x600 so following gamestates show up correctly
         this.world.setBounds(0, 0, this.game.width, this.game.height);
 
@@ -426,11 +431,8 @@ Game.prototype = {
     //this is the function that will be called when player collects all tokens
     levelUp: function() {
         playerInvincible = false;
-        //resets the number of tokens to collect once level up is reached
-        this.tokensToCollect = 5;
         //increases the level
         nextLevel++;
-        // console.log('this is currentLevel', nextLevel);
         thisLevel = this.currentLevel;
 
         //starts the LevelUp state
