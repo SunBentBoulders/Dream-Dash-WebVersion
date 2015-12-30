@@ -1,12 +1,12 @@
 MainMenu = function(game) {
 
-    //	this.music = null;
-    //	this.playButton = null;
+    //  this.music = null;
+    //  this.playButton = null;
     var startButton;
     var creditsButton;
     var optionsButton;
     var optionCount;
-
+    var playerName;
 };
 
 
@@ -79,6 +79,17 @@ MainMenu.prototype = {
     },
 
     create: function(game) {
+
+        var input = new CanvasInput({
+          canvas: document.getElementById('canvas'),
+          placeHolder: 'Enter Name Here',
+          onsubmit: function(){
+            playerName = input._value
+            $('#canvas').hide();
+            }
+        });
+
+
 
         if (music.name !== "bgm" && playMusic) {
             music.stop();

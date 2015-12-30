@@ -60,6 +60,7 @@ GameOver.prototype = {
     },
 
     create: function(game) {
+        console.log(playerName);
         game.add.sprite(0, 0, 'gameover-bg');
 
 
@@ -78,6 +79,9 @@ GameOver.prototype = {
             this.addDesktopMenuOption('Main Menu', function(e) {
                 game.state.start("MainMenu");
             });
+            this.addDesktopMenuOption('Leaderboard', function(e) {
+                game.state.start("LeaderBoard");
+            })
         } else {
             var title = game.add.sprite(game.world.centerX, game.height / 6, "Game Over Title");
             title.anchor.setTo(0.5);

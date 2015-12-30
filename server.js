@@ -32,6 +32,7 @@ app.post('/highscores', function(req, res){
 
   		//make insert to database
   		client.query("INSERT INTO highscores(name, score) values('john', 200)");
+  	})
 });
 
 app.get('/highscores', function(req, res){

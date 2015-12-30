@@ -100,6 +100,7 @@ Preloader.prototype = {
         game.state.add("Credits", Credits);
         game.state.add("Options", Options);
         game.state.add("LevelUp", LevelUp);
+        game.state.add("LeaderBoard", LeaderBoard);
     },
 
     addGameMusic: function(game) {

@@ -1,4 +1,5 @@
 var Game = function(game) {
+    var playerName;
 
     //add in the plugin for transitions
     var transitionPlugin = game.plugins.add(Phaser.Plugin.StateTransition);
@@ -249,6 +250,7 @@ Game.prototype = {
             }
         });
         //=============================================
+        console.log(playerName);
     },
 
     update: function(game) {
