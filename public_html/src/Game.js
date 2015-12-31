@@ -310,7 +310,7 @@ Game.prototype = {
         game.physics.arcade.overlap(this.player, game.tokensToCollect, this.collectToken, null, this);
 
         //check to see if livesToCollect is collected, if so, run collectLife
-        game.physics.arcade.collide(this.player, game.livesToCollect, this.collectLife, null, this);
+        game.physics.arcade.overlap(this.player, game.livesToCollect, this.collectLife, null, this);
 
         // Checks to see if the player overlaps with any of the enemies, if he does, call the checkCollision function.
         // 3rd parameter is collision logic; 4th parameter allows collision to happen if returns true
