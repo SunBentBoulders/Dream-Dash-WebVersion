@@ -414,30 +414,37 @@ Game.prototype = {
         this.loseLife();
     },
 
-     // // this function for debugging only
-     // render: function(game) {
-     //   // this.game.debug.bodyInfo(this.player, 32, 32);
-     //   this.game.debug.body(this.player);
-     //   this.game.enemies.forEachAlive(this.renderGroup, this);
-     //   this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
-     //   this.game.livesToCollect.forEachAlive(this.renderGroup, this);
-     // },
+     // this function for debugging only
+     render: function(game) {
+       // this.game.debug.bodyInfo(this.player, 32, 32);
+       this.game.debug.body(this.player);
+       this.game.enemies.forEachAlive(this.renderGroup, this);
+       this.game.tokensToCollect.forEachAlive(this.renderGroup, this);
+       this.game.livesToCollect.forEachAlive(this.renderGroup, this);
+     },
 
-     // // this function for debugging groups of sprites only
-     // renderGroup: function(member) {
-     //   this.game.debug.body(member);
-     // },
+     // this function for debugging groups of sprites only
+     renderGroup: function(member) {
+       this.game.debug.body(member);
+     },
 
     collectLife: function(player, life) {
         // life.kill();
         // TODO: animate candle going to top of screen
         var lifePositionTween = this.game.add.tween(life.position);
+        // life.fixedToCamera = true;
+        console.log("life.anchor", life.anchor)
+        // life.anchor.setTo(0);
         // sprites move to top left of screen
-        lifePositionTween.to({ x: this.lifeDistance, y: this.game.height / 37.5}, 2000, Phaser.Easing.Exponential.Out, true);
+        lifePositionTween.to({ x: this.game.camera.x + this.lifeDistance, y: this.game.height / 37.5}, 3000, Phaser.Easing.Exponential.Out, true);
 
         var lifeScaleTween = this.game.add.tween(life.scale);
-            // scales sprite from size 0 to full size
-            lifeScaleTween.to({ x: 1, y: 1}, 2000, Phaser.Easing.Exponential.In, true);
+
+        // scales sprite from size 0 to full size
+        lifeScaleTween.to({ x: 0.2, y: 0.2}, 3000, Phaser.Easing.Exponential.In, true);
+        lifeScaleTween.onComplete.add(function() {
+            life.kill();
+        })
 
         this.gainLife();
     },
