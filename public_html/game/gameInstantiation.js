@@ -73,6 +73,5 @@ window.createGame = function(scope, mapId, injector) {
         console.log("destroying game in mainGame.js")
         game.destroy();
     });
-
     // })();
 }

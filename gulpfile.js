@@ -2,13 +2,22 @@
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+
+var stripDebug = require('gulp-strip-debug');
+var stripComments = require('gulp-strip-comments');
+var uncss = require('gulp-uncss');
+
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+
 var imagemin = require('gulp-imagemin');
 var cssmin = require('gulp-minify-css');
-/*var changed = require('gulp-changed');
-var mocha = require('gulp-mocha');*/
+var htmlmin = require('gulp-htmlmin');
+
+var htmlbuild = require('gulp-htmlbuild');
+var clean = require('gulp-clean'); //will delete non-min files for deployment
+var git = require('gulp-git');
 
 var paths = {
     scripts: [
@@ -26,21 +35,58 @@ var paths = {
         'public_html/assets/images/**/*',
         'public_html/icons/**/*'
     ],
-    audio: 'public_html/assets/bgm/**/*',
     css: [
-            'public_html/css/**/*.css',
-            'public_html/assets/style/**/*.css'
+        'public_html/css/**/*.css',
+        'public_html/assets/style/**/*.css'
+    ],
+    html: [
+        'public_html/**/*.html',
+        'public_html/game/**/*.html',
+        'public_html/aboutGame/**/*.html',
+        'public_html/info/**/*.html'
     ]
-        //will need to add style.css at root to this task, or can combine with other style/css
 };
 
 gulp.task('watch', function() {
     gulp.watch(paths.scripts, ['scripts']);
     /*
     gulp.watch(paths.images, ['images']);
-    gulp.watch(paths.audio, ['audio']);
     */
+    gulp.watch(paths.html, ['html']);
     gulp.watch(paths.css, ['css']);
+});
+
+//TASK to Remove Console.log and Debugger statements
+gulp.task('devstrip', function(){
+    return gulp.src('paths.scripts')
+        .pipe(stripDebug())
+        .pipe(stripComments())
+});
+
+//TASK to Remove NonMin & Add Min Script Tags to Index.html
+gulp.task('injecthtml', function(){
+    gulp.src(['public_html/index.html'])
+        .pipe(htmlbuild({
+            js: htmlbuild.preprocess.js(function(block){
+                block.write('minified/allfiles.min.js');
+                block.end();
+            }),
+            css: htmlbuild.preprocess.css(function(block){
+                block.write('minified/stylesheet.min.css');
+                block.end();
+            })
+        .pipe(gulp.dest('public_html/index.html'))    
+    }))
+    //.pipe(gulp.dest('./')); Needed?
+});
+
+gulp.task('minhtml', function(){
+    gulp.src(paths.html)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(rename({
+            extname: '.min.html'
+        }))
+        .pipe(gulp.dest('public_html/minified'))
 });
 
 gulp.task('scripts', function() {
@@ -64,32 +110,69 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('minified'));
 });*/
 
+//TASK to Remove Unused CSS
+/*gulp.task('delcss', function(){
+   return gulp.src(paths.css)
+        .pipe(uncss(paths.html))
+//        .pipe(gulp.dest('./css'))
+});*/
+
 //TASK to Minify All CSS
 gulp.task('mincss', function() {
     return gulp.src(paths.css)
-        /*.pipe(concat('allfiles.css'))*/
         .pipe(cssmin({
             compatibility: 'ie8'
         }))
         .pipe(rename({
             extname: '.min.css'
         }))
-        .pipe(gulp.dest('public_html/minified'))
+        .pipe(gulp.dest('public_html/minified'));
 });
 
-/* START of MOCHA TEST-RELATED
-gulp.task('mocha', function(){
-    return gulp.src(['src/*.js'], {read: false}) //read option "false" allows files to be piped to mocha first
-        .pipe(mocha({reporter: 'nyan'}))
-        //reporter option "nyan" is just one of many we can use
-        .on('error', gutil.log);
+//TASK to delete non-minified files, to-be-used after minification ONLY
+gulp.task('cleanup', function(){
+    return gulp.src([paths.scripts, paths.html, paths.css], {read: false})
+        .pipe(clean())
 });
 
-gulp.task('watch-mocha', function(){
-    gulp.watch('src/**', ['mocha']);
-});
-END OF MOCHA TEST-RELATED
-*/
+//Start of Git TASKS
 
-//Removed ImageMin from default task, will compress elsewhere
-gulp.task('default', ['watch', 'scripts', 'mincss']);
+gulp.task('clone', function(){
+  git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
+    if (err) throw err;
+  });
+});
+
+gulp.task('checkout', function(){
+  git.checkout('branchName', function (err) {
+    if (err) throw err;
+  });
+});
+
+gulp.task('pull', function(){
+    git.pull('upstream', ' ', {args: '--rebase'}, function (err) {
+        if (err) throw err;
+    });
+});
+
+gulp.task('push', function(){
+  git.push('origin', 'master', {args: " -f"}, function (err) {
+    if (err) throw err;
+  });
+});
+
+gulp.task('default', [
+    'watch', 
+    'delcss'
+]);
+
+gulp.task('deploy', [
+//    'watch', 
+    'devstrip',
+//    'cleanup',
+    'scripts', 
+//    'delcss', 
+    'mincss', 
+    'injecthtml', 
+    'minhtml'
+]);
