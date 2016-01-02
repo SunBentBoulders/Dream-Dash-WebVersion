@@ -23,16 +23,24 @@ var router = express.Router();
 app.post('/highscores', function(req, res){
 	// res.send('Get request to server');
 	console.log('im inside of app.post');
+	console.log('this is req', req);
+	console.log('this is req.body',Object.keys(req));
 
 	var results = [];
 
-	pg.connect(connectionString + '?ssl=true', function(err, client) {
+	pg.connect(connectionString + '?ssl=true', function(err, client, done) {
   		if (err) throw err;
   		console.log('Connected to postgres! Lets insert something');
 
   		//make insert to database
-  		client.query("INSERT INTO highscores(name, score) values('john', 200)");
+  		client.query("INSERT INTO highscores(name, score) values('jEGOR', 200)", function(err, result){
+  			done();
+  			if(err) throw err;
+  			res.send()
+  		});
   	})
+
+  	pg.end();
 });
 
 app.get('/highscores', function(req, res){

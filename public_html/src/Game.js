@@ -256,7 +256,7 @@ Game.prototype = {
             }
         });
         //=============================================
-        console.log(playerName);
+        // console.log(playerName);
     },
 
     update: function(game) {
