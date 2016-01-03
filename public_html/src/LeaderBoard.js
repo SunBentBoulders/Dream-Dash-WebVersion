@@ -9,12 +9,16 @@ LeaderBoard.prototype = {
 
 	},
 	submitName: function(){
+		console.log('this is the score', this.score);
+		console.log('this is the score', game.score);
+		console.log('this is the score', endGameScore);
+
 		console.log('hi im submitted');
 		$.ajax({
 			url: 'http://localhost:5000/highscores',
-			data: 'hithere',
+			data: JSON.stringify({'playerName':playerName, 'score' :endGameScore }),
 			type: 'POST',
-			contentType: "application/json",
+			contentType: "application/json; charset=UTF-8",
 			success: function(){
 				console.log('Post request was a success');
 			},

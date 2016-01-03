@@ -1,6 +1,7 @@
 var express = require('express');
 var pg = require('pg');
 var app = express();
+var bodyParser = require('body-parser');
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public_html'));
@@ -20,11 +21,22 @@ var connectionString = "postgres://mzrywechfymqij:sQfZ_XE1k6enGY5RnyTnNkLD7j@ec2
 var pgp = require('pg-promise')();
 var router = express.Router();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.post('/highscores', function(req, res){
 	// res.send('Get request to server');
 	console.log('im inside of app.post');
-	console.log('this is req', req);
-	console.log('this is req.body',Object.keys(req));
+	console.log('this is req.body["playerName"]', req.body['playerName']);
+	// console.log('this is req route', req.route);
+	// console.log('this is req keys',Object.keys(req))
+	// console.log('this is req res',req.res);
+	// console.log('this is req method', req.method)
+
+	// console.log('this is req.query',req.query)
+	// console.log('this is req.client', req.client)
+	// console.log('this is res objectkeys',Object.keys(res));
+	// console.log('this is res.output', res.output);
 
 	var results = [];
 
@@ -33,7 +45,7 @@ app.post('/highscores', function(req, res){
   		console.log('Connected to postgres! Lets insert something');
 
   		//make insert to database
-  		client.query("INSERT INTO highscores(name, score) values('jEGOR', 200)", function(err, result){
+  		client.query("INSERT INTO highscores(name, score) values('" + req.body['playerName'] + "', " + req.body['score'] + ")", function(err, result){
   			done();
   			if(err) throw err;
   			res.send()

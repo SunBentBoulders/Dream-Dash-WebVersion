@@ -36,6 +36,7 @@ var Game = function(game) {
     var pause;
     var pausedText;
     var totalScore;
+    var endGameScore;
     thisLevel = 0;
     // tracks current level that the player is on
     this.currentLevel = 0;
@@ -369,6 +370,7 @@ Game.prototype = {
     gameOver: function(player) {
         // player.kill();
         window.navigator.vibrate([2000]);
+        endGameScore = totalScore || 0;
         totalScore = 0;
         // reset world bounds to the original 800x600 so following gamestates show up correctly
         this.world.setBounds(0, 0, this.game.width, this.game.height);
