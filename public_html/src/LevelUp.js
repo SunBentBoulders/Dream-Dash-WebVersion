@@ -79,7 +79,6 @@ LevelUp.prototype = {
     },
 
     create: function(game) {
-        console.log(playerName);
         this.stage.backgroundColor = 0x4B0082
 
         if (game.device.desktop) {

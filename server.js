@@ -27,16 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/highscores', function(req, res){
 	// res.send('Get request to server');
 	console.log('im inside of app.post');
-	console.log('this is req.body["playerName"]', req.body['playerName']);
-	// console.log('this is req route', req.route);
-	// console.log('this is req keys',Object.keys(req))
-	// console.log('this is req res',req.res);
-	// console.log('this is req method', req.method)
-
-	// console.log('this is req.query',req.query)
-	// console.log('this is req.client', req.client)
-	// console.log('this is res objectkeys',Object.keys(res));
-	// console.log('this is res.output', res.output);
+	// console.log('this is req.body["playerName"]', req.body['playerName']);
 
 	var results = [];
 
@@ -67,7 +58,7 @@ app.get('/highscores', function(req, res){
 
   		//make get request to database
 	   	client
-	    	.query('SELECT * FROM highscores')
+	    	.query('SELECT * FROM highscores ORDER BY score DESC')
 	    	.on('row', function(row) {
 	      		results.push(row);
 	    	})
