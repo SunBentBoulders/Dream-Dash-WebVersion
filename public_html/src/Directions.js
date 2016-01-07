@@ -1,7 +1,7 @@
 var Directions = function(game){};
 
-var storyLine = "Tap left/right to move";
-var directionsFullText = "Fast asleep and lost in a dream\nCollect the clocks to wake up\nThe candles will guide your way";
+var directionsFullText = '1. Tap left/right to move\n2. Collect the clocks\n   to sound off your alarm\n3. The candles give life & light';
+var storyLine = 'Fast asleep and lost in a dream\nAvoid the ghoulies & wake up';
 var text, text2, titleText;
 
 Directions.prototype = {
@@ -11,19 +11,23 @@ Directions.prototype = {
         
         if (window.deviceAssetSize === 'desktop') {
             game.load.image('directions-bg', 'assets/images/arrow_directions_crop.png');
+            game.load.image('clock_candle', 'img/clock_candle_combo.png');
         } else if (window.deviceAssetSize === '1024x768') {
-            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions1024x768.png');
+            game.load.image('clock_candle', 'img/clock_candle_combo.png');
         } else if (window.deviceAssetSize === '960x640') {
-            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions960x640.png');
+            game.load.image('clock_candle', 'img/clock_candle_combo.png');
         } else if (window.deviceAssetSize === '1280x800') {
-            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions1280x800.png');
+            game.load.image('clock_candle', 'img/clock_candle_combo.png');
         } else if (window.deviceAssetSize === '1024x600') {
-            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions1024x600.png');
+            game.load.image('clock_candle', 'img/clock_candle_combo.png');
         } else if (window.deviceAssetSize === '1408x792') {
-            game.load.image('directions-bg', 'assets/images/mobile_directions.png');
+            game.load.image('directions-bg', 'assets/images/mobile_directions1408x792.png');
+            game.load.image('clock_candle', 'img/clock_candle_combo.png');
         }
-        
-        game.load.image('clock_candle', 'img/clock_candle_combo.png');
     },
     
     addDesktopMenuOption: function(text, callback) {
@@ -69,20 +73,21 @@ Directions.prototype = {
     },
     
     create: function(game){
-        
-       game.state.add('Preloader', Preloader);
+        this.stage.backgroundColor = 0x000000;
+        game.state.add('Preloader', Preloader);
         
         if (this.game.device.desktop) {
 
-            titleText = game.add.text(this.game.width/2, this.game.height.centerY/4, "How To Play", {
+            titleText = game.add.text(this.game.width/4, this.game.height.centerY/4, "How To Play", {
                 font: 'bold ' + this.game.height / 20 + 'pt TheMinion',
                 fill: '#7CCD7C',
                 align: 'center'
             });
             titleText.anchor.set(0);
 
-            game.add.sprite(this.game.width.centerX, this.game.height/6, 'directions-bg');
-            game.add.sprite(this.game.width.centerX, this.game.height/8, 'clock_candle');
+            var bg = game.add.sprite(this.game.width.centerX, this.game.height/6, 'directions-bg');
+            var combo = game.add.sprite(this.game.width.centerX, this.game.height/8, 'clock_candle');
+            combo.anchor.set(-.4, -.4);
     
             text2 = game.add.text(this.game.width/2, this.game.height/6, directionsFullText, {
                 font: this.game.height / 40 + 'pt TheMinion',
