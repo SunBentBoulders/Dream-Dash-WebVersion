@@ -1,11 +1,6 @@
 Game = {
-    /* Here we've just got some global level vars that persist regardless of State swaps */
+
     score: 0,
-
-    /* If the music in your game needs to play through-out a few State swaps, then you could reference it here */
-    //    music: null,
-
-    /* Your game can check Game.orientated in internal loops to know if it should pause or not */
     orientated: false
 
 };
@@ -14,7 +9,6 @@ var gameOptions = {
     playSound: true,
     playMusic: true
 };
-var musicPlayer;
 
 Boot = function(game) {};
 
@@ -89,24 +83,18 @@ Boot.prototype = {
     },
 
     create: function(game) {
+
         game.state.start('Directions');
-//        game.state.start('Preloader');
 
     },
 
     enterIncorrectOrientation: function() {
-
         Game.orientated = false;
-
         document.getElementById('orientation').style.display = 'block';
-
     },
 
     leaveIncorrectOrientation: function() {
-
         Game.orientated = true;
-
         document.getElementById('orientation').style.display = 'none';
-
     }
 };
