@@ -74,7 +74,7 @@ gulp.task('injecthtml', function(){
                 block.write('minified/stylesheet.min.css');
                 block.end();
             })
-//        .pipe(gulp.dest('public_html/index.html'))    
+//        .pipe(gulp.dest('public_html/index.html'))
     }))
     //.pipe(gulp.dest('./')); Needed?
 });
@@ -166,12 +166,12 @@ gulp.task('default', [
 ]);
 
 gulp.task('deploy', [
-    'watch', 
+    'watch',
     'devstrip',
 //    'cleanup',
-    'scripts', 
-//    'delcss', 
-    'mincss', 
-    'injecthtml', 
+    'scripts',
+//    'delcss',
+    'mincss',
+    'injecthtml',
     'minhtml'
 ]);
