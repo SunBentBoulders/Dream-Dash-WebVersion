@@ -52,8 +52,8 @@ gulp.task('watch', function() {
     /*
     gulp.watch(paths.images, ['images']);
     */
-    gulp.watch(paths.html, ['html']);
-    gulp.watch(paths.css, ['css']);
+
+    gulp.watch(paths.css, ['mincss']);
 });
 
 //TASK to Remove Console.log and Debugger statements
@@ -75,7 +75,40 @@ gulp.task('injecthtml', function(){
                 block.write('minified/stylesheet.min.css');
                 block.end();
             })
-        .pipe(gulp.dest('public_html/index.html'))    
+//        .pipe(gulp.dest('public_html/index.html'))
+    }))
+    //.pipe(gulp.dest('./')); Needed?
+});
+
+gulp.task('minhtml', function(){
+    gulp.src(paths.html)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(rename({
+            extname: '.min.html'
+        }))
+        .pipe(gulp.dest('public_html/minified'))
+});
+
+//TASK to Remove Console.log and Debugger statements
+gulp.task('devstrip', function(){
+    return gulp.src('paths.scripts')
+        .pipe(stripDebug())
+        .pipe(stripComments())
+});
+
+//TASK to Remove NonMin & Add Min Script Tags to Index.html
+gulp.task('injecthtml', function(){
+    gulp.src(['public_html/index.html'])
+        .pipe(htmlbuild({
+            js: htmlbuild.preprocess.js(function(block){
+                block.write('minified/allfiles.min.js');
+                block.end();
+            }),
+            css: htmlbuild.preprocess.css(function(block){
+                block.write('minified/stylesheet.min.css');
+                block.end();
+            })
+        .pipe(gulp.dest('public_html/index.html'))
     }))
     //.pipe(gulp.dest('./')); Needed?
 });
@@ -99,7 +132,7 @@ gulp.task('scripts', function() {
         .pipe(rename({
             extname: '.min.js'
         }))
-        .pipe(gulp.dest('public_html/minified'));
+//        .pipe(gulp.dest('public_html/minified'));
 
 });
 
@@ -136,17 +169,16 @@ gulp.task('cleanup', function(){
 });
 
 //Start of Git TASKS
-
 gulp.task('clone', function(){
-  git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
-    if (err) throw err;
+    git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
+        if (err) throw err;
   });
 });
 
 gulp.task('checkout', function(){
-  git.checkout('branchName', function (err) {
-    if (err) throw err;
-  });
+    git.checkout('branchName', function (err) {
+        if (err) throw err;
+    });
 });
 
 gulp.task('pull', function(){
@@ -156,23 +188,24 @@ gulp.task('pull', function(){
 });
 
 gulp.task('push', function(){
-  git.push('origin', 'master', {args: " -f"}, function (err) {
-    if (err) throw err;
-  });
+    git.push('origin', 'master', {args: " -f"}, function (err) {
+        if (err) throw err;
+    });
 });
 
 gulp.task('default', [
-    'watch', 
-    'delcss'
+    'watch',
+    'mincss',
+    'minhtml'
 ]);
 
 gulp.task('deploy', [
-//    'watch', 
+    'watch',
     'devstrip',
 //    'cleanup',
-    'scripts', 
-//    'delcss', 
-    'mincss', 
-    'injecthtml', 
+    'scripts',
+//    'delcss',
+    'mincss',
+    'injecthtml',
     'minhtml'
 ]);
