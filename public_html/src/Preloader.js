@@ -16,15 +16,6 @@ Preloader.prototype = {
         utils.centerGameObjects([this.game.logo, this.game.status]);
     },
 
-    /*loadFonts: function(game) {
-        WebFontConfig = {
-          custom: {
-            families: ['TheMinion'],
-            urls: ['assets/style/theminion.css']
-          }
-        }
-    },*/
-
     preload: function(game) {
         //adds content to splash screen
         game.add.sprite(0, 0, 'loading-bg');
@@ -85,8 +76,6 @@ Preloader.prototype = {
         //loads audio
         game.load.audio('bgm', 'assets/bgm/background_music.ogg');
         game.load.audio('startDing', 'assets/bgm/startDing.wav');
-
-        /*this.loadFonts(game);*/
 
     },
 
