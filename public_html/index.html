@@ -13,7 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- minified CSS styles -->
-    <link rel="stylesheet" type="text/css" href="minified/stylesheet.min.css">
+<!--<link rel="stylesheet" type="text/css" href="minified/stylesheet.min.css"> -->
+
+    <!-- htmlbuild:css -->
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <!-- endbuild -->
+
     </head>
 
     <body class="container-fluid" ng-app="dreamDash">
@@ -30,7 +35,7 @@
                 </ul>
             </ul>
         </nav>
-    
+
         <div ui-view></div>
 
         <!-- Angular -->
@@ -54,7 +59,6 @@
 	<script type="text/javascript" src="info/info.js"></script>
 	<script type="text/javascript" src="game/gameInstantiation.js"></script>
 	<script type="text/javascript" src="factories/factories.js"></script>
-
 
 	<script src="vendor/phaser.js"></script>
 	<script src="vendor/webfontloader.js"></script>
@@ -106,5 +110,4 @@
         <!-- // <script src="minified/allfiles.min.js"></script> -->
        
     </body>
-
 </html>
