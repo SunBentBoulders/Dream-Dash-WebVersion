@@ -20,15 +20,17 @@ window.createGame = function(scope, mapId, injector) {
         return check;
     }
 
-   /*  scale game canvas based on aspect ratios
+    /*  scale game canvas based on aspect ratios
      5 possible aspect ratios: (width:height)
      4:3, 1024 x 768 --> 4/3 = 1.3333
      3:2, 960 x 640 --> 3/2 = 1.5
      16:10, 1280 x 800 --> 16/10 = 1.6
      17:10, 1024 x 600 --> 17/10 = 1.7
-     16:9, 1408 x 792 --> 16/9 = 1.77778*/
+     16:9, 1408 x 792 --> 16/9 = 1.77778
+    */
+    // temporary sizing with top navbar: grab innerHeight - 60px for navbar
     var windowWidth = window.innerWidth * window.devicePixelRatio;
-    var windowHeight = window.innerHeight * window.devicePixelRatio;
+    var windowHeight = (window.innerHeight - 60) * window.devicePixelRatio;
     var ratio = windowWidth / windowHeight;
 
     // if user is on desktop, use 800x600 game. else use size based on aspect ratio

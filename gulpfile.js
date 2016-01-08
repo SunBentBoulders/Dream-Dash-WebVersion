@@ -74,7 +74,7 @@ gulp.task('injecthtml', function(){
                 block.write('minified/stylesheet.min.css');
                 block.end();
             })
-//        .pipe(gulp.dest('public_html/index.html'))    
+//        .pipe(gulp.dest('public_html/index.html'))
     }))
     //.pipe(gulp.dest('./')); Needed?
 });
@@ -98,7 +98,7 @@ gulp.task('scripts', function() {
         .pipe(rename({
             extname: '.min.js'
         }))
-//        .pipe(gulp.dest('public_html/minified'));
+        .pipe(gulp.dest('public_html/minified'));
 
 });
 
@@ -135,43 +135,43 @@ gulp.task('cleanup', function(){
 });
 
 //Start of Git TASKS
-gulp.task('clone', function(){
-    git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
-        if (err) throw err;
-  });
+
+gulp.task('clone', function(){
+  git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
+    if (err) throw err;
+  });
 });
 
-gulp.task('checkout', function(){
-    git.checkout('branchName', function (err) {
-        if (err) throw err;
+gulp.task('checkout', function(){
+  git.checkout('branchName', function (err) {
+    if (err) throw err;
+  });
+});
+
+gulp.task('pull', function(){
+    git.pull('upstream', ' ', {args: '--rebase'}, function (err) {
+        if (err) throw err;
     });
 });
 
-gulp.task('pull', function(){
-    git.pull('upstream', ' ', {args: '--rebase'}, function (err) {
-        if (err) throw err;
-    });
-});
-
-gulp.task('push', function(){
-    git.push('origin', 'master', {args: " -f"}, function (err) {
-        if (err) throw err;
-    });
+gulp.task('push', function(){
+  git.push('origin', 'master', {args: " -f"}, function (err) {
+    if (err) throw err;
+  });
 });
 
 gulp.task('default', [
-    'watch', 
-    'mincss',
-    'minhtml'
+    'watch',
+    'mincss'
 ]);
 
 gulp.task('deploy', [
-    'watch', 
+    'watch',
     'devstrip',
 //    'cleanup',
-    'scripts', 
-//    'delcss', 
-    'mincss', 
-    'injecthtml', 
+    'scripts',
+//    'delcss',
+    'mincss',
+    'injecthtml',
     'minhtml'
 ]);
