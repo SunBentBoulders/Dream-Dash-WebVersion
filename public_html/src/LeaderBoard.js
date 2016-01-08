@@ -21,21 +21,25 @@ LeaderBoard.prototype = {
 		leaderBoardBanner.setShadow(3, 3, 'rgba(0,0,0,1.5)', 5);
         leaderBoardBanner.anchor.set(0.5);
 
+        playerName = prompt('Please Enter Your Name');
+        LeaderBoard.prototype.postNameAndScoreToDatabase(game);
 
 
-        //creates the text input field for submitting name
-		var input = new CanvasInput({
-		  canvas: document.getElementById('canvas'),
-		  placeHolder: 'Enter Name Here',
-		  onsubmit: function(){
-		    playerName = input._value
-		    //hides the text field
-		    $('#canvas').hide();
-		    //calls function to post the players score and name to the database
-		    LeaderBoard.prototype.postNameAndScoreToDatabase(game);
+  //       //creates the text input field for submitting name
+		// var input = new CanvasInput({
+		//   canvas: document.getElementById('canvas'),
+		//   placeHolder: 'Enter Name Here',
+		//   onsubmit: function(){
+		//     playerName = input._value
+		//     //hides the text field
+		//     $('#canvas').hide();
+		//     //calls function to post the players score and name to the database
+		//     LeaderBoard.prototype.postNameAndScoreToDatabase(game);
 		    
-		    }
-		});
+		//     }
+
+		// });
+		    // console.log(namePrompt)
 
 		var mainMenuButton = game.add.button(game.world.centerX, (3 * game.height / 7.5) + game.height / 2, 'Main Menu');
 
@@ -50,7 +54,7 @@ LeaderBoard.prototype = {
 
 		$.ajax({
 			//this is the url during testing, will need to be changed for deployment
-			url: 'http://localhost:5000/highscores',
+			url: 'http://dreamdash.herokuapp.com/highscores',
 			data: JSON.stringify({'playerName':playerName, 'score' :endGameScore }),
 			type: 'POST',
 			contentType: "application/json; charset=UTF-8",
