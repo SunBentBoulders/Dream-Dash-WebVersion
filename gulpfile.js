@@ -136,28 +136,28 @@ gulp.task('cleanup', function(){
 
 //Start of Git TASKS
 
-gulp.task('clone', function(){
-  git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
-    if (err) throw err;
-  });
+gulp.task('clone', function(){
+  git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
+    if (err) throw err;
+  });
 });
 
-gulp.task('checkout', function(){
-  git.checkout('branchName', function (err) {
-    if (err) throw err;
-  });
+gulp.task('checkout', function(){
+  git.checkout('branchName', function (err) {
+    if (err) throw err;
+  });
 });
 
-gulp.task('pull', function(){
-    git.pull('upstream', ' ', {args: '--rebase'}, function (err) {
-        if (err) throw err;
+gulp.task('pull', function(){
+    git.pull('upstream', ' ', {args: '--rebase'}, function (err) {
+        if (err) throw err;
     });
 });
 
-gulp.task('push', function(){
-  git.push('origin', 'master', {args: " -f"}, function (err) {
-    if (err) throw err;
-  });
+gulp.task('push', function(){
+  git.push('origin', 'master', {args: " -f"}, function (err) {
+    if (err) throw err;
+  });
 });
 
 gulp.task('default', [
