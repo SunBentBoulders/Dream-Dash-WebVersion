@@ -74,7 +74,6 @@ gulp.task('injecthtml', function(){
                 block.write('minified/stylesheet.min.css');
                 block.end();
             })
-//        .pipe(gulp.dest('public_html/index.html'))
     }))
     //.pipe(gulp.dest('./')); Needed?
 });
@@ -135,7 +134,6 @@ gulp.task('cleanup', function(){
 });
 
 //Start of Git TASKS
-
 gulp.task('clone', function(){
   git.clone('https://github.com/sunbentboulders/Dream-Dash-WebVersion.git', function (err) {
     if (err) throw err;
@@ -166,7 +164,7 @@ gulp.task('default', [
 ]);
 
 gulp.task('deploy', [
-    'watch',
+//    'watch',
     'devstrip',
 //    'cleanup',
     'scripts',
