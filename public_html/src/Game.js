@@ -1,4 +1,5 @@
 var Game = function(game) {
+    var playerName;
 
     //add in the plugin for transitions
     var transitionPlugin = game.plugins.add(Phaser.Plugin.StateTransition);
@@ -31,11 +32,11 @@ var Game = function(game) {
     // same as 2000 but in relation to the game.width
     this.right = 1;
     this.left = 0;
-    var clouds;
     var backgroundScroll;
     var pause;
     var pausedText;
     var totalScore;
+    var endGameScore;
     thisLevel = 0;
     // tracks current level that the player is on
     this.currentLevel = 0;
@@ -59,8 +60,7 @@ Game.prototype = {
             // console.log('vibrate is on');
         }
 
-        // load the rest of the game assets not already in Preloader state
-        // game.load.image('clouds', 'img/cloud.png');
+        // load the rest of the game assets. see preload gamestate for others
         game.load.image('enemy', 'img/friendlyGhost.png');
         game.load.image('life', 'img/candle.png');
         // each sprite image is 32px wide by 48px tall in spritesheet
@@ -96,35 +96,15 @@ Game.prototype = {
 
         //  Enables the Arcade Physics system for game
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        /* creates infinite tiling of the cloud image
-         clouds = game.add.tileSprite(0,0,game.scrollableWidth,game.height, 'clouds');
-         set the scroll speed for the background image
-         backgroundScroll = 1;
-         */
-
 
         // this is for the game menu
         this.stage.disableVisibilityChange = false;
 
-         /*
-         code for the plain background
-         ==================================
-         set background color
-         this.stage.backgroundColor = 0x00007f;
-         add horizon line
-         var graphics = game.add.graphics(0,0);
-         graphics.beginFill(0x000019);
-         graphics.lineStyle(2, 0x000019, 1);
-         syntax: top left x, top left y, width, height
-         graphics.drawRect(0, game.height/2, game.scrollableWidth, game.height);
-         graphics.endFill();
-         ==================================
 
+        // add main sprites to screen
+        //===================================================
+        // add group of enemy stars
 
-         add main sprites to screen
-        ===================================================
-         add group of enemy stars
-         */
         game.enemies = game.add.group();
         game.enemyCount = 0;
 
@@ -197,6 +177,7 @@ Game.prototype = {
             // add a sprite
             game.addSprite(className, spriteName, bodySizeX, bodySizeY, timeToTween);
             // after adding an enemy, call the addEnemyTimer function again after a random amount of time elapses
+
             game.dropTimer.add(Phaser.Timer.SECOND * Math.random() * timerInterval, game.startSpriteTimer, this, className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval);
         };
         // parameters: className, spriteName, bodySizeX, bodySizeY, timeToTween, timerInterval
@@ -301,6 +282,7 @@ Game.prototype = {
             }
         });
         //=============================================
+        // console.log(playerName);
     },
 
     update: function(game) {
@@ -323,11 +305,8 @@ Game.prototype = {
         // Reset the players velocity (movement)
         this.player.body.velocity.x = 0;
 
-        // Controls=========================================
-        //checks to see if the keyboard is being used
-        // console.log('the keyboard is enabled',game.input.keyboard.enabled);
-        //check to see if finger is touching screen
-        // console.log('the touchScreen is enabled',!!game.input.pointer1);
+        // controls=========================================
+
         //this is for computer input
         if (game.device.desktop) {
             if (cursors.left.isDown) {
@@ -348,7 +327,6 @@ Game.prototype = {
             //this if for the phone input
             if (game.input.pointer1.isDown) {
                 //check to see if the touch is happening on the left
-                // console.log('pointer1 is down');
                 if (Math.floor(game.input.x / (game.width / 2)) === this.left) {
                     //move to the left
                     this.player.animations.play('left');
@@ -382,7 +360,6 @@ Game.prototype = {
         if (this.tokensToCollect + this.collectedTokens === this.collectedTokens) {
             //calls function to increase the level
             this.levelUp();
-            // this.gameOver();
         }
     },
 
@@ -393,11 +370,10 @@ Game.prototype = {
         // Add and update the score, set number of tokens collected and left to collect
         this.collectedTokens++;
         this.tokensToCollect--;
-        // console.log('this.score',this.score);
         this.score += 10;
         totalScore = this.score;
-        // console.log('game.score', game.score);
-        //Upper right corner display of left to collect
+
+        //this sets the upper right corner left to collect
         this.leftToCollect.text = ' x ' + this.tokensToCollect;
         this.showCurrentScore.text = 'Score: ' + this.score;
     },
@@ -450,10 +426,11 @@ Game.prototype = {
     },
 
     gameOver: function(player) {
-        // console.log("gameover");
         // player.kill();
         window.navigator.vibrate([2000]);
+        endGameScore = totalScore || 0;
         // reset score and level
+
         totalScore = 0;
         this.score = 0;
         this.currentLevel = 0;
@@ -502,7 +479,6 @@ Game.prototype = {
             this.player.alpha = newAlpha;
             this.game.enemies.setAll('alpha', newAlpha);
             this.game.tokensToCollect.setAll('alpha', newAlpha);
-            // clouds.alpha = newAlpha;
             this.backgroundImage.alpha = newAlpha;
         }
     },
@@ -530,7 +506,6 @@ Game.prototype = {
         this.player.alpha = newAlpha;
         this.game.enemies.setAll('alpha', newAlpha);
         this.game.tokensToCollect.setAll('alpha', newAlpha);
-        // clouds.alpha = newAlpha;
         this.backgroundImage.alpha = newAlpha;
 
     },

@@ -1,12 +1,12 @@
 MainMenu = function(game) {
 
-    //	this.music = null;
-    //	this.playButton = null;
+    //  this.music = null;
+    //  this.playButton = null;
     var startButton;
     var creditsButton;
     var optionsButton;
     var optionCount;
-
+    var playerName;
 };
 
 
