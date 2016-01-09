@@ -1,8 +1,8 @@
 body {
-    margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+    margin: 20px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
     background: #000;
      /* makes space for header above body */
-    margin-top: 80px;
+    /*margin-top: 80px;*/
     padding: 20px 20px 20px 20px;
     color: rgb(157,156,154);
     font-family: sans-serif;
