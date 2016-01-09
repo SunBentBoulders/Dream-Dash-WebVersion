@@ -21,12 +21,12 @@ var git = require('gulp-git');
 
 var paths = {
     scripts: [
+        'public_html/vendor/**/*.js',
         'public_html/app.js',
         'public_html/factories/**/*.js',
         'public_html/aboutGame/**/*.js',
         'public_html/info/**/*.js',
         'public_html/game/**/*.js',
-        'public_html/vendor/**/*.js',
         'public_html/lib/**/*.js',
         'public_html/src/**/*.js'
     ],
