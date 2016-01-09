@@ -36,6 +36,7 @@ var Game = function(game) {
     var pause;
     var pausedText;
     var totalScore;
+    var endGameScore;
     thisLevel = 0;
     // tracks current level that the player is on
     this.currentLevel = 0;
@@ -194,7 +195,6 @@ Game.prototype = {
         this.player.animations.add('left', [0, 1, 2, 3, 2, 1], 12, true);
         this.player.animations.add('right', [5, 6, 7, 8, 7, 6], 12, true);
 
-
         // Score - clocks on right of screen=============================================
         // will add this back once level up game state is made
         // this.scoreText = game.add.text(this.realPlayer.x-400, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
@@ -282,7 +282,7 @@ Game.prototype = {
             }
         });
         //=============================================
-        console.log(playerName);
+        // console.log(playerName);
     },
 
     update: function(game) {
@@ -428,7 +428,9 @@ Game.prototype = {
     gameOver: function(player) {
         // player.kill();
         window.navigator.vibrate([2000]);
+        endGameScore = totalScore || 0;
         // reset score and level
+
         totalScore = 0;
         this.score = 0;
         this.currentLevel = 0;

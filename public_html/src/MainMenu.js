@@ -80,17 +80,6 @@ MainMenu.prototype = {
 
     create: function(game) {
 
-        var input = new CanvasInput({
-          canvas: document.getElementById('canvas'),
-          placeHolder: 'Enter Name Here',
-          onsubmit: function(){
-            playerName = input._value
-            $('#canvas').hide();
-            }
-        });
-
-
-
         if (music.name !== "bgm" && playMusic) {
             music.stop();
             music = game.add.audio('bgm');

@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "pg": "4.4.3",
     "phaser-state-transition-plugin": "^0.1.6"

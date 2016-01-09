@@ -60,7 +60,7 @@ GameOver.prototype = {
     },
 
     create: function(game) {
-        console.log(playerName);
+        // console.log(playerName);
         game.add.sprite(0, 0, 'gameover-bg');
 
 
