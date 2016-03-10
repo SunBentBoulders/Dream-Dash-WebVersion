@@ -10,7 +10,7 @@ angular.module('dreamDash.factories', [])
 			"email": "shanna.sullivan@gmail.com",
 			"linkedin": "shannasullivan",
 			"blog": "http://www.shannamichelledesigns.com/blog",
-			"bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta ipsum, vitae ullamcorper nulla. Nulla malesuada feugiat diam. Phasellus sagittis quam urna, varius mattis ligula feugiat a. Integer vel metus auctor, convallis nunc id, molestie augue. Curabitur ligula erat, tincidunt quis tellus eget, ultrices hendrerit orci. Vestibulum sodales nisi tortor. Pellentesque vel quam elit. Ut egestas leo erat, ut viverra nibh luctus non. Quisque ipsum elit, porttitor et condimentum sit amet, tristique ut arcu. Donec pellentesque malesuada turpis eget interdum. Quisque vulputate mauris sit amet dapibus tristique. Nam at imperdiet eros, id mattis lorem. Quisque ut nisi sed mauris accumsan lobortis at eu metus. Etiam fermentum consequat lacus quis molestie. Phasellus fermentum dolor eu tellus luctus feugiat."
+			"bio": "I am a full-stack software engineer that gravitates toward front-end technologies. I love solving programming puzzles on projects that ultimately bring someone joy or improve their quality of life. As an active person with an eye for design, I am drawn to the game, fitness, design, and acoustics industries. I am a passionate and goal-oriented person who is always looking for a challenge. I learn by throwing myself head-first into projects and figuring things out along the way. When I'm not programming, you can find me running, climbing trees and rocks, blues-fusion dancing, or walking on my hands."
 		},
 		"dev2": {
             "firstname": "Jazz",
